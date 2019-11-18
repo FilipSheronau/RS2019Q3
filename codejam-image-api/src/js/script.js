@@ -516,6 +516,7 @@ class Palette {
         filterValue: this.filterValue,
         isClear: this.isClear,
       };
+      localStorage.setItem('paletteLayout', this.canvas.toDataURL('image/png'));
       localStorage.setItem('state', JSON.stringify(state));
     }
   }
