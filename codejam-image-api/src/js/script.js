@@ -12,6 +12,7 @@ class Palette {
       top: null,
     };
     this.busy = false;
+    this.filterValue = '';
   }
 
   // body load an other events
@@ -22,7 +23,9 @@ class Palette {
       this.currentColor = state.currentColor;
       this.prevColor = state.prevColor;
       this.scale = state.scale;
+      this.filterValue = state.filterValue;
       document.getElementById('inp-color').value = this.currentColor;
+      document.getElementById('search-val').value = this.filterValue;
     }
     this.createCanvas();
     this.toggleTool(document.querySelector(`#${this.mode}`));
@@ -37,6 +40,11 @@ class Palette {
     document.getElementById('inp-color').addEventListener('change', (event) => { this.inputColor(event); });
     // right menu
     document.querySelector('.right-menu').addEventListener('mousedown', (event) => { this.sizeTool(event); });
+    // send request
+    document.getElementById('load-img').addEventListener('click', (event) => { this.loadImageRequest(event); });
+    // search value
+    document.getElementById('search-val').addEventListener('change', () => { this.searchValue(); });
+    document.getElementById('search-val').addEventListener('focus', () => { document.getElementById('search-val').value = ''; });
     // canvas events
     this.canvas.addEventListener('mousedown', (event) => {
       if (this.mode === 'pensil') {
@@ -79,13 +87,6 @@ class Palette {
   createCanvas() {
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
-    // console.log(localStorage.getItem('paletteLayout'));
-    // if (localStorage.getItem('paletteLayout')) {
-    //   const dataURL = localStorage.getItem('paletteLayout');
-    //   const img = new Image();
-    //   img.src = dataURL;
-    //   img.onload = this.pastImage(img);
-    // }
   }
 
   // toggle tool;
@@ -138,15 +139,33 @@ class Palette {
 
   // past image
   pastImage(data) {
-    const hRatio = this.scale / data.width;
+    this.ctx.clearRect(0, 0, this.scale, this.scale);
+    if ((data.height / data.width) * this.scale < this.scale) {
+      // center based on width
+      const width = this.scale;
+      const height = (data.height / data.width) * width;
+      const offset = (this.scale - height) / 2;
+      this.ctx.drawImage(data, 0, offset, width, height);
+    } else {
+      // center based on height
+      const height = this.scale;
+      const width = (data.width / data.height) * height;
+      const offset = (this.scale - width) / 2;
+      this.ctx.drawImage(data, offset, 0, width, height);
+    }
+    this.ctx.fillStyle = this.currentColor;
+
+    /* const hRatio = this.scale / data.width;
     const vRatio = this.scale / data.height;
     const ratio = Math.min(hRatio, vRatio);
+    console.log('ratio', ratio);
     const centerShiftX = (this.scale - data.width * ratio) / 2;
     const centerShiftY = (this.scale - data.height * ratio) / 2;
+    console.log('centerShiftX', centerShiftX);
     this.ctx.clearRect(0, 0, this.scale, this.scale);
     this.ctx.drawImage(data, 0, 0, this.scale, this.scale,
       centerShiftX, centerShiftY, data.width * ratio, data.height * ratio);
-    this.ctx.fillStyle = this.currentColor;
+    this.ctx.fillStyle = this.currentColor; */
   }
 
   // input color
@@ -196,8 +215,8 @@ class Palette {
   getCoords(data) {
     const box = this.canvas.getBoundingClientRect();
     return {
-      top: Math.floor((data.pageY - box.top + window.pageYOffset) / (512 / this.scale)),
-      left: Math.floor((data.pageX - box.left + window.pageXOffset) / (512 / this.scale)),
+      top: Math.floor((data.pageY - (box.top + window.pageYOffset)) / (512 / this.scale)),
+      left: Math.floor((data.pageX - (box.left + window.pageXOffset)) / (512 / this.scale)),
     };
   }
 
@@ -433,6 +452,38 @@ class Palette {
     return result;
   }
 
+  loadImageRequest() {
+    const queryData = document.getElementById('search-val').value;
+    const url = `https://api.unsplash.com/photos/random?query=${queryData}&client_id=785302351771a9ee8d1980df37fcbbb3bd7473ab5e2b9dac9190480de4dcacea`;
+    fetch(url)
+      .then((res) => {
+        if (res.status === 404) {
+          let er;
+          /* res.errors.forEach((element) => {
+            er += element;
+          }); */
+          throw new Error(er);
+        } else if (res.status !== 200) {
+          throw new Error(`status ${res.status}`);
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        const img = new Image();
+        /* imgSrc = data.urls.small; */
+        img.setAttribute('crossOrigin', 'anonymous');
+        img.src = data.urls.small;/* imgSrc.toDataURL('image/png'); */
+        img.onload = () => {
+          this.pastImage(img);
+        };
+      });
+  }
+
+  searchValue() {
+    this.filterValue = document.getElementById('search-val').value;
+  }
+
   saveLocalStorage() {
     if (localStorage.getItem('state')) {
       if (localStorage.getItem('state')) {
@@ -444,6 +495,7 @@ class Palette {
         currentColor: this.currentColor,
         prevColor: this.prevColor,
         scale: this.scale,
+        filterValue: this.filterValue,
       };
       localStorage.setItem('paletteLayout', this.canvas.toDataURL('image/png'));
       localStorage.setItem('state', JSON.stringify(state));
@@ -453,6 +505,7 @@ class Palette {
         currentColor: this.currentColor,
         prevColor: this.prevColor,
         scale: this.scale,
+        filterValue: this.filterValue,
       };
       localStorage.setItem('state', JSON.stringify(state));
     }
@@ -460,6 +513,8 @@ class Palette {
 
   cleanCanvas() {
     this.ctx.clearRect(0, 0, this.scale, this.scale);
+    document.getElementById('search-val').value = '';
+    this.filterValue = '';
   }
 }
 

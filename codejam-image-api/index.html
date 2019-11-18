@@ -36,8 +36,15 @@
           <li class="collection-item active" id="pal128" data-id="128"><span>128x128</span></li>
           <li class="collection-item" id="pal256" data-id="256"><span>256x256</span></li>
           <li class="collection-item" id="pal512" data-id="512"><span>512x512</span></li>          
-        </ul>        
-        <div class="palete-pal card">
+        </ul>
+        <div class="canvas-control">
+          <button class="waves-effect waves-light btn" id="load-img">load</button>
+          <form action="" id="search-form">            
+            <input id="search-val" placeholder="town" type="text" name="search-value">
+          </form>
+          <button class="waves-effect waves-light btn grey-scale">B&W</button>
+        </div>
+        <div class="palete-pal card">          
           <canvas id="canvas" width="128" height="128"></canvas>
         </div>        
     </main>
