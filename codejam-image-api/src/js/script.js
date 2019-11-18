@@ -45,6 +45,8 @@ class Palette {
     // search value
     document.getElementById('search-val').addEventListener('change', () => { this.searchValue(); });
     document.getElementById('search-val').addEventListener('focus', () => { document.getElementById('search-val').value = ''; });
+    // grayscale
+    document.querySelector('.grey-scale').addEventListener('click', () => { this.greyscale(); });
     // canvas events
     this.canvas.addEventListener('mousedown', (event) => {
       if (this.mode === 'pensil') {
@@ -154,18 +156,6 @@ class Palette {
       this.ctx.drawImage(data, offset, 0, width, height);
     }
     this.ctx.fillStyle = this.currentColor;
-
-    /* const hRatio = this.scale / data.width;
-    const vRatio = this.scale / data.height;
-    const ratio = Math.min(hRatio, vRatio);
-    console.log('ratio', ratio);
-    const centerShiftX = (this.scale - data.width * ratio) / 2;
-    const centerShiftY = (this.scale - data.height * ratio) / 2;
-    console.log('centerShiftX', centerShiftX);
-    this.ctx.clearRect(0, 0, this.scale, this.scale);
-    this.ctx.drawImage(data, 0, 0, this.scale, this.scale,
-      centerShiftX, centerShiftY, data.width * ratio, data.height * ratio);
-    this.ctx.fillStyle = this.currentColor; */
   }
 
   // input color
@@ -482,6 +472,21 @@ class Palette {
 
   searchValue() {
     this.filterValue = document.getElementById('search-val').value;
+  }
+
+  greyscale() {
+    const imgPixels = this.ctx.getImageData(0, 0, this.scale, this.scale);
+    for (let y = 0; y < imgPixels.height; y += 1) {
+      for (let x = 0; x < imgPixels.width; x += 1) {
+        const i = (y * 4) * imgPixels.width + x * 4;
+        const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+        imgPixels.data[i] = avg;
+        imgPixels.data[i + 1] = avg;
+        imgPixels.data[i + 2] = avg;
+      }
+    }
+    this.ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+    this.canvas.toDataURL();
   }
 
   saveLocalStorage() {
