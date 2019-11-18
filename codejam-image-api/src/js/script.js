@@ -11,6 +11,7 @@ class Palette {
       left: null,
       top: null,
     };
+    this.isClear = true;
     this.busy = false;
     this.filterValue = '';
   }
@@ -23,6 +24,7 @@ class Palette {
       this.currentColor = state.currentColor;
       this.prevColor = state.prevColor;
       this.scale = state.scale;
+      this.isClear = state.isClear;
       this.filterValue = state.filterValue;
       document.getElementById('inp-color').value = this.currentColor;
       document.getElementById('search-val').value = this.filterValue;
@@ -255,9 +257,11 @@ class Palette {
           y1 += signY;
         }
       }
+      this.isClear = false;
     }
   }
 
+  // fill Area
   fillArea(data) {
     this.busy = true;
     const startX = this.getCoords(data).left;
@@ -325,6 +329,7 @@ class Palette {
       }
     }
     this.ctx.putImageData(dstImg, 0, 0);
+    this.isClear = false;
     return true;
   }
 
@@ -442,32 +447,24 @@ class Palette {
     return result;
   }
 
-  loadImageRequest() {
+  async loadImageRequest() {
     const queryData = document.getElementById('search-val').value;
-    const url = `https://api.unsplash.com/photos/random?query=${queryData}&client_id=785302351771a9ee8d1980df37fcbbb3bd7473ab5e2b9dac9190480de4dcacea`;
-    fetch(url)
-      .then((res) => {
-        if (res.status === 404) {
-          let er;
-          /* res.errors.forEach((element) => {
-            er += element;
-          }); */
-          throw new Error(er);
-        } else if (res.status !== 200) {
-          throw new Error(`status ${res.status}`);
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
+    const myKey = '785302351771a9ee8d1980df37fcbbb3bd7473ab5e2b9dac9190480de4dcacea';
+    try {
+      const response = await fetch(`https://api.unsplash.com/photos/random?query=${queryData}&client_id=${myKey}`);
+      if (response.ok) {
+        const data = await response.json();
         const img = new Image();
-        /* imgSrc = data.urls.small; */
         img.setAttribute('crossOrigin', 'anonymous');
-        img.src = data.urls.small;/* imgSrc.toDataURL('image/png'); */
+        img.src = data.urls.small;
         img.onload = () => {
+          this.isClear = false;
           this.pastImage(img);
         };
-      });
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   searchValue() {
@@ -475,18 +472,23 @@ class Palette {
   }
 
   greyscale() {
-    const imgPixels = this.ctx.getImageData(0, 0, this.scale, this.scale);
-    for (let y = 0; y < imgPixels.height; y += 1) {
-      for (let x = 0; x < imgPixels.width; x += 1) {
-        const i = (y * 4) * imgPixels.width + x * 4;
-        const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        imgPixels.data[i] = avg;
-        imgPixels.data[i + 1] = avg;
-        imgPixels.data[i + 2] = avg;
+    if (!this.isClear) {
+      const imgPixels = this.ctx.getImageData(0, 0, this.scale, this.scale);
+      for (let y = 0; y < imgPixels.height; y += 1) {
+        for (let x = 0; x < imgPixels.width; x += 1) {
+          const i = (y * 4) * imgPixels.width + x * 4;
+          const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+          imgPixels.data[i] = avg;
+          imgPixels.data[i + 1] = avg;
+          imgPixels.data[i + 2] = avg;
+        }
       }
+      this.ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+      this.canvas.toDataURL();
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('first you need to create an image');
     }
-    this.ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
-    this.canvas.toDataURL();
   }
 
   saveLocalStorage() {
@@ -501,6 +503,7 @@ class Palette {
         prevColor: this.prevColor,
         scale: this.scale,
         filterValue: this.filterValue,
+        isClear: this.isClear,
       };
       localStorage.setItem('paletteLayout', this.canvas.toDataURL('image/png'));
       localStorage.setItem('state', JSON.stringify(state));
@@ -511,6 +514,7 @@ class Palette {
         prevColor: this.prevColor,
         scale: this.scale,
         filterValue: this.filterValue,
+        isClear: this.isClear,
       };
       localStorage.setItem('state', JSON.stringify(state));
     }
@@ -520,6 +524,7 @@ class Palette {
     this.ctx.clearRect(0, 0, this.scale, this.scale);
     document.getElementById('search-val').value = '';
     this.filterValue = '';
+    this.isClear = true;
   }
 }
 
