@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/material-icons.woff2') format('woff2');
+}
+
+html, body {
+  font-family: "Helvetica","Arial",sans-serif!important;
+  font-size: 16px!important;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+$color-primary: '63, 81, 181';
+$color-primary-dark: '48,63,159';
+$color-accent: '63, 81, 181';
+
+.mdl-textfield {
+  width: 55px!important;
+}
+
+.mdl-switch {
+  width: 38px!important;
+}
+
+.control {
+  display: flex!important;
+  justify-content: space-between;
+  align-items: center;  
+  background: #dedede70;
+  border-radius: 15px;
+  padding: 0px 10px;
+  color: #474545;
+  font-weight: bold!important;
+  width: 200px;
+}
+
+.control .mdl-menu,
+.control .mdl-menu__outline {
+  width: 55px!important;
+}
+
+.control input,
+.control li {
+  color: #474545;
+  font-weight: bold;
+}
+
+.control .mdl-menu__item {
+  width: 23px!important;
+}
+
+#update-button {
+  margin: 0px;
+}
+
+#lang-batton {
+  display: block;
+}
+
+#toggle-degrees {
+  display: block;
+}
+
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
