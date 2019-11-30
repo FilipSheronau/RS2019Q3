@@ -1,11 +1,9 @@
-export default class Events {
-  start() {
-    document.addEventListener('load',() => {
-      
-    })
-  }
+import getLocation from './api/getLocation';
+import getWeather from './api/getWeather';
 
-  add() {
-
-  }
+export default function events() {
+  window.addEventListener('load', async () => {
+    await getLocation();
+    await getWeather();
+  });
 }

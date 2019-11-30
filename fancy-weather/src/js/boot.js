@@ -1,4 +1,5 @@
-import CreateElement from './createElement';
+import firstCreate from './dom';
+import events from './events';
 
-const createElement = new CreateElement();
-createElement.start();
+firstCreate();
+events();

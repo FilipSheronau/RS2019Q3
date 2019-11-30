@@ -1,23 +1,25 @@
 export default class Query {
-  constructor(url, parameters) {
+  constructor(url, parameters, headers) {
     this.url = url;
     this.parameters = parameters;
+    this.headers = headers;
     this.data = null;
   }
 
-  async getQuery() {
+  async getData() {
+    let result;
     try {
-      const response = await fetch(`${this.url}${this.parametersToStr()}`);
-      if (response.ok) {
-        const data = await response.json();
-        this.data = data;
-        this.returnResponse(data);
-      } else {
-        throw new Error(response.statusText);
+      const response = await fetch(`${this.url}${this.parametersToStr()}`, this.headers);
+      const data = await response.json();
+      if (!response.ok) {
+        throw data;
       }
-    } catch (err) {
-      throw new Error(err);
+      result = data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
+    return result;
   }
 
   parametersToStr() {
@@ -31,9 +33,5 @@ export default class Query {
       result = `${result}${key}=${val}`;
     });
     return result;
-  }
-
-  returnResponse() {
-    return this.data;
   }
 }
