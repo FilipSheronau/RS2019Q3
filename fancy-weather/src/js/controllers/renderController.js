@@ -1,4 +1,4 @@
-export default function render(tag, path, atr, inner) {
+export default function (tag, path, atr, inner) {
   const elem = document.createElement(tag);
   Object.entries(atr).forEach(([key, val]) => {
     elem.setAttribute(key, val);

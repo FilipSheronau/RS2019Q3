@@ -1,4 +1,4 @@
-export default class Query {
+export default class {
   constructor(url, parameters, headers) {
     this.url = url;
     this.parameters = parameters;
@@ -7,19 +7,16 @@ export default class Query {
   }
 
   async getData() {
-    let result;
     try {
       const response = await fetch(`${this.url}${this.parametersToStr()}`, this.headers);
       const data = await response.json();
       if (!response.ok) {
         throw data;
       }
-      result = data;
+      return data;
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
+      throw new Error(JSON.stringify(error));
     }
-    return result;
   }
 
   parametersToStr() {

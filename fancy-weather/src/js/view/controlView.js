@@ -1,14 +1,8 @@
-import render from './render';
-import state from './state';
+import render from '../controllers/renderController';
 
-export default function firstCreate() {
-  // .wrapper
-  render('div', 'body', {
-    class: 'wrapper',
-  });
-
+export default function () {
   // .control
-  render('div', '.wrapper', {
+  render('div', 'header', {
     class: 'control',
   });
 
@@ -90,7 +84,8 @@ export default function firstCreate() {
 
   // .control #toggle-degrees label
   render('label', '#toggle-degrees', {
-    class: 'mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1',
+    class: 'mdl-switch mdl-js-switch mdl-js-ripple-effect',
+    for: 'switch-1',
   });
 
   // .control #toggle-degrees label input
@@ -109,16 +104,4 @@ export default function firstCreate() {
 
   // .control #toggle-degrees span
   render('span', '#toggle-degrees', {}, '\u00B0F');
-
-  render('div', '.wrapper', {
-    class: 'today',
-  });
-
-  render('div', '.wrapper', {
-    class: 'anydays',
-  });
-
-  render('div', '.wrapper', {
-    class: 'geo',
-  });
 }

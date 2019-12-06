@@ -10,6 +10,12 @@ html, body {
   font-size: 16px!important;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -30,8 +36,12 @@ $color-primary: '63, 81, 181';
 $color-primary-dark: '48,63,159';
 $color-accent: '63, 81, 181';
 
-.mdl-textfield {
+.control .mdl-textfield {
   width: 55px!important;
+}
+
+.search .mdl-textfield {
+  width: 205px!important;
 }
 
 .mdl-switch {
@@ -48,6 +58,80 @@ $color-accent: '63, 81, 181';
   color: #474545;
   font-weight: bold!important;
   width: 200px;
+  height: 55px;
+  margin: 0 0 10px 0;
+}
+
+.search {
+  display: flex!important;
+  justify-content: space-between;
+  align-items: center;  
+  background: #dedede70;
+  border-radius: 15px;
+  padding: 0px 10px;
+  color: #474545;
+  font-weight: bold!important;
+  width: 255px;
+  height: 55px;
+  margin: 0 0 10px 0;
+}
+
+main {
+  display: flex!important;
+}
+
+.geo {
+  flex-grow: 1;  
+}
+
+.voice-search {
+  right: 0; 
+}
+
+.today {
+  margin-top: 20px;
+}
+
+.today h4 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
+}
+
+.today h6 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.content-center {
+  display: flex;
+  height: 200px;
+  align-items: center;
+  justify-content: center;  
+}
+
+.voice-search i {
+  color: rgba(0,0,0, 0.26);
+}
+.temp {
+  display: flex;
+}
+.temp .span-temp {
+  display: block;
+  font-size: 150px;
+  font-weight: bold;
+  padding-top: 30px;
+}
+
+.temp .span-sign {
+  display: block;
+  font-size: 60px;
+  font-weight: bold;
+  padding-bottom: 80px;  
+}
+
+.search div {
+  margin-right: 10px;
 }
 
 .control .mdl-menu,
@@ -77,9 +161,31 @@ $color-accent: '63, 81, 181';
   display: block;
 }
 
+@keyframes spin {
+  100% {
+   transform: rotate(360deg);
+  }
+}
+
+#search-button .anim-span {  
+  animation: spin 800ms infinite linear;
+  display: block;
+  padding: 0px;  
+  width: 40px;
+  height: 40px;
+}
+
+.show-of {
+  display: none!important;
+}
+
+#search-button .anim-span i {
+  margin: 0 0 0 -8px;
+  font-size: 40px;
+}
+
 .wrapper {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
 }
-

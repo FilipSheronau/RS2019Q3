@@ -1,15 +1,36 @@
-import Query from '../query';
+import Query from '../controllers/queryController';
 import state from '../state';
+import weatherController from '../controllers/weatherController';
+import updateView from '../view/updateView';
 
 export default async function getWeather() {
-  let { searchValue } = state;
-  if (searchValue === '') searchValue = state.location;
-  const query = new Query('https://api.openweathermap.org/data/2.5/forecast', {
-    appid: 'f42e7440e7ff7ce0acb6e595cb833a13',
-    q: searchValue,
-    lang: 'ru',
-    units: state.units,
-  });
-  const result = await query.getData();
-  console.log(result);
+  let qVal;
+  if (state.searchValue === '') {
+    qVal = state.location;
+  } else {
+    qVal = state.searchValue;
+  }
+
+  try {
+    updateView.fetchWeatherToggle();
+    const query = new Query('https://api.openweathermap.org/data/2.5/forecast', {
+      appid: 'f42e7440e7ff7ce0acb6e595cb833a13',
+      q: qVal,
+      lang: state.lang,
+      units: state.units,
+    });
+    const response = await query.getData();
+    if (!response) {
+      throw response;
+    }
+    updateView.fetchWeatherToggle();
+    weatherController(response);
+  } catch (error) {
+    const er = JSON.parse(error.message);
+    updateView.fetchWeatherToggle();
+    if (er.message === 'city not found') {
+      alert('Город не найден!');
+    }
+    throw new Error(error.message);
+  }
 }
