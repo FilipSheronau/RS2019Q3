@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>MongoDB</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -25,8 +25,135 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-background="#26527d">
+					<h1><span clas="hljs-name">MongoDB</span></h1>					
+				</section>
+				<section data-background="#26527d">
+					<h1>Introduction to<br> MongoDB</h1>					
+				</section>
+				<section>
+					<p><span class="hljs-string">MongoDB</span> is a NoSQL database which stores the data in form of key-value pairs. It is an <b>Open Source</b>, <b>Document Database</b> which provides high performance and scalability along with data modelling and data management of huge sets of data in an enterprise application.</p>
+				</section>
+				<section data-background="#26527d">
+					<h1>What is Document based storage?</h1>					
+				</section>
+				<section>
+					<p><span class="hljs-attribute">Student</span> object has attributes <span class="hljs-attribute">name</span>, <span class="hljs-attribute">rollno</span> and <span class="hljs-attribute">subjects</span>, where subjects is a List.</p>
+					<pre>
+<code>	{
+		name : "Stduytonight",
+		rollno : 1,
+		subjects :["C Language","C++","Core Java"]
+	}</code>
+					</pre>
+				</section>
+				<section data-background="#26527d">
+					<h1>Brief History of MongoDB</h1>					
+				</section>
+				<section>
+					<p>MongoDB was developed by Eliot Horowitz and Dwight Merriman in the year 2007</p>
+					<img src="img/1.jpg">
+					<p><small>In 2013, the company was officially named to MongoDB Inc.</small></p>
+				</section>
+				<section data-background="#26527d">
+					<h1>Key Features of MongoDB</h1>
+				</section>
+				<section>					
+						<ol class="content">
+							<small>
+								<li>MongoDB provides high performance
+									<img src="img/MongoDB-feature-less-io-operations.png">
+								</li>
+								<li>MongoDB has a rich Query Language, supporting all the major CRUD operations</li>
+								<li><b>Auto Replication</b> feature of MongoDB leads to High Availability</li>
+								<li>Sharding is a major feature of MongoDB</li>
+								<li>MongoDB supports multiple Storage Engines</li>
+							</small>							
+						</ol>
+						
+				</section>				
+				<section>
+					<h3>Organizations that use MongoDB</h3>
+					<ul class="content">
+						<li class="hljs-string">Adobe</li>
+						<li class="hljs-string">LinkedIn</li>
+						<li class="hljs-string">McAfee</li>
+						<li class="hljs-string">FourSquare</li>
+						<li class="hljs-string">eBay</li>
+						<li class="hljs-string">MetLife</li>
+						<li class="hljs-string">SAP</li>
+					</ul>
+				</section>						
+				<section data-background="#26527d">
+					<h1>Overview of MongoDB</h1>					
+				</section>
+				<section>
+					<small>MongoDB consists of a set of databases. Each database again consists of Collections. Data in MongoDB is stored in collections.</small>
+					<img src="img/overview-of-mongodb.png">
+				</section>				
+				<section>
+					<h4>We can use namespace to logically group and nest collections</h4>
+					<p class="fragment">There can be one collection named</p>
+					<code class="fragment hljs-string">db.studytonight.users</code>
+					<p class="fragment">to save user informations, then there can be others like</p>
+					<code class="fragment hljs-string">db.studytonight.forum.questions</code>
+					<p class="fragment">and</p>
+					<code class="fragment hljs-string">db.studytonight.forum.answers</code>
+					<p class="fragment">to store forum questions and answers respectively</p>
+				</section>
+				<section>
+					<h3>Data is stored and queried in <span class="hljs-string">BSON</span>, its binary representation of JSON-like data.</h3>
+				</section>
+				<section>
+					<h4>Sample Data in MongoDB</h4>
+					<img src="img/sample-data-mongodb.png">
+				</section>
+				<section>
+					<p>Different Datatypes in one Document</p>
+					<pre>
+<code>  var mydoc = {
+    _id : ObjectId("5099803df3f4948bd2f98391"),
+    name : { first: "Alan", last: "Turing" },
+    birth : new Date('Jun 23, 1912'),
+    death : new Date('Jun 07, 1954'),
+    contribs : [ "Turing machine", "Turing test", "Turingery" ],
+    view : NumberLong(1250000),
+  }</code>
+					</pre>
+				</section>
+				<section data-background="#26527d">
+					<h1>MongoDB <span class="hljs-string">vs</span> SQL Databases</h1>
+				</section>
+				<section>
+					<p>some of the key differences between MongoDB and other SQL databases</p>
+					<small>					
+						<table>
+							<tbody><tr><th><span class="hljs-string">SQL Database</span></th><th><span class="hljs-string">NoSQL Database (MongoDB)</span></th></tr>
+								<tr><td>Relational database</td><td>Non-relational database</td></tr>
+								<tr><td>Supports SQL query language</td><td>Supports JSON query language</td></tr>
+								<tr><td>Table based</td><td>Collection based and key-value pair</td></tr>
+								<tr><td>Row based</td><td>Document based</td></tr>
+								<tr><td>Column based</td><td>Field based</td></tr>
+								<tr><td>Support foreign key</td><td>No support for foreign key</td></tr>
+								<tr><td>Support for triggers</td><td>No Support for triggers</td></tr>
+								<tr><td>Contains schema which is predefined</td><td>Contains dynamic schema</td></tr>
+								<tr><td>Not fit for hierarchical data storage</td><td>Best fit for hierarchical data storage</td></tr>
+								<tr><td>Vertically scalable - increasing RAM</td><td>Horizontally scalable - add more servers</td></tr>
+								<tr><td>Emphasizes on ACID properties (Atomicity, Consistency, Isolation and Durability)</td><td>Emphasizes on CAP theorem (Consistency, Availability and Partition tolerance)</td></tr>
+							</tbody>
+						</table>
+					</small>
+				</section>				
+				<section data-background="#26527d">
+					<h1>Advantages of MongoDB</h1>
+				</section>
+				<section>
+					<p>Advantages of MongoDB</p>
+					<img src="img/advantages-of-mongodb.png">
+				</section>
+				<section data-background="#26527d">
+					<h1><span class="hljs-string">Thank you for your attention!</span></h1>
+				</section>
 			</div>
 		</div>
 
