@@ -1,23 +1,35 @@
+
 ***(1sl)***
+-----------
+
+Hello everyone. I want to talk about MongoDB
+-------
+
 ***(2sl)***
-##Introduction to MongoDB ***(3sl)***
+-----------
+Introduction to MongoDB ***(3sl)***
+-----------------------------------
 
 MongoDB is a NoSQL database which stores the data in form of key-value pairs. It is an Open Source, Document Database which provides high performance and scalability along with data modelling and data management of huge sets of data in an enterprise application.
 
 MongoDB also provides the feature of Auto-Scaling. Since, MongoDB is a cross platform database and can be installed across different platforms like Windows, Linux etc. ***(4sl)***
 
-##What is Document based storage?
+What is Document based storage?
+-------------------------------
 
 A Document is nothing but a data structure with name-value pairs like in JSON. It is very easy to map any custom Object of any programming language with a MongoDB Document. ***(5sl)*** For example : Student object has attributes name, rollno and subjects, where subjects is a List.
 
 We can see, Documents are actually JSON representation of custom Objects. Also, excessive JOINS can be avoided by saving data in form of Arrays and Documents(Embedded) inside a Document. ***(6sl)***
-##Brief History of MongoDB ***(7sl)***
+
+Brief History of MongoDB ***(7sl)***
+------------------------------------
 
 MongoDB was developed by Eliot Horowitz and Dwight Merriman in the year 2007, when they experienced some scalability issues with the relational database while developing enterprise web applications at their company DoubleClick. According to Dwight Merriman, one of the developers of MongoDB, this name of the database was derived from the word humongous to support the idea of processing large amount of data.
 
 In 2009, MongoDB was made as an open source project, while the company offered commercial support services. Many companies started using MongoDB for its amazing features. The New York Times newspaper used MongoDB to build a web based application to submit the photos. In 2013, the company was officially named to MongoDB Inc. ***(8sl)***
 
-##Key Features of MongoDB 
+Key Features of MongoDB
+-----------------------
 
 Apart from most of the NoSQL default features, MongoDB does bring in some more, very important and useful features : ***(9sl)***
 
@@ -26,7 +38,8 @@ Apart from most of the NoSQL default features, MongoDB does bring in some more, 
 3.	Sharding is a major feature of MongoDB. Horizontal Scalability is possible due to sharding.
 4.	MongoDB supports multiple Storage Engines. When we save data in form of documents(NoSQL) or tables(RDBMS) who saves the data? It's the Storage Engine. Storage Engines manages how data is saved in memory and on disk. ***(10sl)***
 
-##Organizations that use MongoDB
+Organizations that use MongoDB
+------------------------------
 
 Below are some of the big and notable organizations which are using MongoDB as database for most of their business applications.
 
@@ -38,7 +51,8 @@ Below are some of the big and notable organizations which are using MongoDB as d
 -	MetLife
 -	SAP ***(11sl)***
 
-##Overview of MongoDB ***(12sl)***
+Overview of MongoDB ***(12sl)***
+--------------------------------
 
 MongoDB consists of a set of databases. Each database again consists of Collections. Data in MongoDB is stored in collections. The below figure depicts the typical database structure in MongoDB.
 -	Collection is nothing but a set of MongoDB documents. These documents are equivalent to the row of data in tables in RDBMS. But, collections in MongoDB do not relate to any set schema as compared to RDBMS. Collections are a way of storing related data. Being schemaless, any type of Document can be saved in a collection, although similarity is recommended for index efficiency. Document's can have a maximum size of 4MB. ***(13sl)***
@@ -57,7 +71,8 @@ Documents are not identified by a simple ID, but by an object identifier type. T
 
 The value of fields in a document can be anything, including other documents, arrays, and arrays of documents, date object, a String etc. ***(24sl)***
 
-##MongoDB vs SQL Databases ***(25sl)***
+MongoDB vs SQL Databases ***(25sl)***
+-------------------------------------
 
 It is a well known fact that SQL databases have ruled the world of data technologies and have been the primary source of data storage for over 4 decades. Generally the SQL databases are used, mainly for accessing relational databases.
 
@@ -71,7 +86,8 @@ The major difference between MongoDB and SQL Databases is the way they handle da
 
 MongoDB Documents also align with the structure of objects in modern programming languages, as they are a form of JSON. This makes it easy for developers to map the data used in the application to its associated document in the database. While in SQL Database, creating a table with columns mapped to the attributes of an object in programming language, appears a little tedious. ***(26sl)***
 
-##Advantages of MongoDB ***(27sl)***
+Advantages of MongoDB ***(27sl)***
+----------------------------------
 
 Having seen the good features of MongoDB, now every developer should be able to understand why it is better to use NoSQL based database for big data transactions and for implementing a scalable model. Now, its time to leave behind the schema definitions of RDBMS and get an advantage of using schema-less databases like MongoDB. Let us see some of the vital advantages of MongoDB :
 1.	First and foremost, it is very easy to install and setup the MongoDB.
@@ -92,4 +108,5 @@ Having seen the good features of MongoDB, now every developer should be able to 
 16.	MongoDB follows regular release cycle of its newer versions.
 17.	The support for Sharding is one of its key feature. Sharding is the process of storing the data in different machines and MongoDB's ability to process the data, as and when the size of the data grows. This results in the horizontal scaling. With sharding, more amount of data can be written and read back as and when there is an increase in the data growth. ***(28sl)***
 
-##THANK YOU FOR YOUR ATTENTION
+THANK YOU FOR YOUR ATTENTION
+----------------------------
