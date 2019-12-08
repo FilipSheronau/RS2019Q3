@@ -1,0 +1,3 @@
+- **[YouTube video](https://youtu.be/zYP29Ql72sg)**
+- **[Reveal presentation](https://presentation-filip.netlify.com/)**
+- **[transcript](https://github.com/rolling-scopes-school/filipsheronau-RS2019Q3/blob/presentation/presentation/transcript.md)**
