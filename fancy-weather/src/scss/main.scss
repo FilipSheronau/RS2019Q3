@@ -80,7 +80,7 @@ main {
   display: flex!important;
 }
 
-.geo {
+.geo,.content {
   flex-grow: 1;  
 }
 
@@ -96,11 +96,13 @@ main {
   text-transform: uppercase;
   font-weight: bold;
   margin: 0;
+  text-align: center;
 }
 
 .today h6 {
   font-weight: bold;
   margin: 0;
+  text-align: center;
 }
 
 .content-center {
@@ -121,6 +123,24 @@ main {
   font-size: 150px;
   font-weight: bold;
   padding-top: 30px;
+}
+
+.today-icon {
+  display: block;
+  margin-top: -70px;  
+}
+
+.summary {
+  margin-top: -10px;  
+}
+
+.summary,
+.feelsLike,
+.humidity,
+.speedWind {
+  display: block;
+  font-weight: bold;
+  margin-left: 20px;
 }
 
 .temp .span-sign {
@@ -189,3 +209,29 @@ main {
   margin: 0 auto;
   padding: 15px;
 }
+
+.anydays {
+  display: flex;
+  height: 150px;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.anydays .day {
+  display: block;
+  margin: 10px;  
+}
+
+.anydays .day-icon {
+  width: 80px;
+  height: 80px;
+  margin-top: -15px;
+  margin-left: -15px;
+}
+
+.anydays .day-temp {
+  font-size: 30px;
+}
+
+

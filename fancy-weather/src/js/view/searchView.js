@@ -35,9 +35,9 @@ export default function () {
 
   // .search form>div div label
   render('label', '.search form>div', {
-    class: 'mdl-textfield__label',
+    class: 'mdl-textfield__label search-inp-cl',
     for: 'search-inp',
-  }, 'City');
+  });
 
   // .search form button
   render('button', '.search form', {

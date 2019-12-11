@@ -29,7 +29,7 @@ export default async function getWeather() {
     const er = JSON.parse(error.message);
     updateView.fetchWeatherToggle();
     if (er.message === 'city not found') {
-      alert('Город не найден!');
+      alert(state.errors.cityN);
     }
     throw new Error(error.message);
   }

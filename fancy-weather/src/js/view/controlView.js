@@ -27,15 +27,15 @@ export default function () {
   render('input', '#lang-batton', {
     type: 'text',
     class: 'mdl-textfield__input',
-    value: 'EN',
-    id: 'sample',
+    id: 'langId',
     readonly: 'true',
   });
 
   // .control #lang-batton input(hidden)
   render('input', '#lang-batton', {
     type: 'hidden',
-    name: 'sample',
+    id: 'langIdHid',
+    name: 'langId',
   });
 
   // .control #lang-batton i
@@ -45,13 +45,13 @@ export default function () {
 
   // .control #lang-batton label
   render('label', '#lang-batton', {
-    for: 'sample',
+    for: 'langId',
     class: 'mdl-textfield__label',
   }, 'Country');
 
   // .control #lang-batton ul
   render('ul', '#lang-batton', {
-    for: 'sample',
+    for: 'langId',
     class: 'mdl-menu mdl-menu--bottom-left mdl-js-menu',
   });
 

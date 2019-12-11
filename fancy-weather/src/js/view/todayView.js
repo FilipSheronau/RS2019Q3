@@ -31,4 +31,34 @@ export default function () {
   render('span', '.temp', {
     class: 'span-sign',
   });
+
+  // main .content .content-center .info
+  render('div', '.content-center', {
+    class: 'info',
+  });
+
+  // .today-icon
+  render('img', '.info', {
+    class: 'today-icon',
+  });
+
+  // .summary
+  render('span', '.info', {
+    class: 'summary',
+  });
+
+  // .feelsLike
+  render('span', '.info', {
+    class: 'feelsLike',
+  });
+
+  // .speedWind
+  render('span', '.info', {
+    class: 'speedWind',
+  });
+
+  // .humidity
+  render('span', '.info', {
+    class: 'humidity',
+  });
 }
