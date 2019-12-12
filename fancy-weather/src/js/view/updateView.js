@@ -27,9 +27,13 @@ export default {
   farUpdate() {
     document.querySelector('.temp .span-temp').innerHTML = state.todayWeather.temp;
     document.querySelector('.feelsLike').innerHTML = `${state.todayWeather.feelsLikeText}: ${state.todayWeather.feelsLike}\u00B0`;
+    document.querySelector('.day-temp1').innerHTML = `${state.day1.temp}\u00B0`;
+    document.querySelector('.day-temp2').innerHTML = `${state.day2.temp}\u00B0`;
+    document.querySelector('.day-temp3').innerHTML = `${state.day3.temp}\u00B0`;
   },
 
   langUpdate() {
+    document.querySelector('.today h4').innerHTML = state.nameLocation;
     document.querySelector('.today h6').innerHTML = state.date;
     document.querySelector('.summary').innerHTML = state.todayWeather.summary;
     document.querySelector('.feelsLike').innerHTML = `${state.todayWeather.feelsLikeText}: ${state.todayWeather.feelsLike}\u00B0`;

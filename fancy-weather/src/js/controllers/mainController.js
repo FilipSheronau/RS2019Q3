@@ -1,5 +1,6 @@
 import state from '../state';
 import updateView from '../view/updateView';
+import lang from '../lang';
 
 export default {
   getDate() {
@@ -8,28 +9,25 @@ export default {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      weekday: 'long',
+      weekday: 'short',
       timezone: 'UTC',
       hour: 'numeric',
       minute: 'numeric',
     };
-    state.date = date.toLocaleString(state.lang, options);
+    state.date = date.toLocaleString('RU', options);
 
     const otherDate = new Date();
-    const options2 = {
-      weekday: 'long',
-    };
     otherDate.setDate(otherDate.getDate() + 1);
-    const day1 = otherDate.toLocaleString(state.lang, options2);
-    state.day1.weekDay = day1;
+    const day1 = otherDate.getDay();
+    state.day1.weekDay = this.weekDayMethod(day1);
 
     otherDate.setDate(otherDate.getDate() + 1);
-    const day2 = otherDate.toLocaleString(state.lang, options2);
-    state.day2.weekDay = day2;
+    const day2 = otherDate.getDay();
+    state.day2.weekDay = this.weekDayMethod(day2);
 
     otherDate.setDate(otherDate.getDate() + 1);
-    const day3 = otherDate.toLocaleString(state.lang, options2);
-    state.day3.weekDay = day3;
+    const day3 = otherDate.getDay();
+    state.day3.weekDay = this.weekDayMethod(day3);
   },
 
   setFar() {
@@ -66,5 +64,9 @@ export default {
   round(x) {
     const result = Math.round(x);
     return result === 0 ? 0 : result;
+  },
+
+  weekDayMethod(x) {
+    return lang.weekkdays[x][state.lang];
   },
 };

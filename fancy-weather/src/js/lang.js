@@ -40,15 +40,47 @@ export default {
     BY: 'шырата',
   },
   errors: {
-    cityN: {
-      EN: 'City not found!',
-      RU: 'Город не найден!',
-      BY: 'Горад не знойдзены!',
-    },
     emptyFieldSearch: {
       EN: 'Enter the city name!',
       RU: 'Введите название города!',
       BY: 'увядзіце назву горада!',
+    },
+  },
+  weekkdays: {
+    1: {
+      RU: 'понедельник',
+      BY: 'панядзелак',
+      EN: 'monday',
+    },
+    2: {
+      RU: 'вторник',
+      BY: 'аўторак',
+      EN: 'tuesday',
+    },
+    3: {
+      RU: 'среда',
+      BY: 'серада',
+      EN: 'wednesday',
+    },
+    4: {
+      RU: 'четверг',
+      BY: 'чацьвер',
+      EN: 'thursday',
+    },
+    5: {
+      RU: 'пятница',
+      BY: 'пятніца',
+      EN: 'friday',
+    },
+    6: {
+      RU: 'суббота',
+      BY: 'субота',
+      EN: 'saturday',
+    },
+    0: {
+      RU: 'воскресенье',
+      BY: 'нядзеля',
+      EN: 'sunday',
     },
   },
 };

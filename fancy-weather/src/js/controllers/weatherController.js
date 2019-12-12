@@ -1,9 +1,7 @@
 import state from '../state';
-import countryNames from '../../json/names.json';
 import func from './mainController';
 
 export default function (data) {
-  const country = countryNames[data.city.country];
   const isFar = state.isFahrenheit;
   const { temp } = data.list[0].main;
   const wind = data.list[0].wind.speed;
@@ -15,15 +13,11 @@ export default function (data) {
 
   state.todayWeather.speedWind = wind;
 
-  state.city = data.city.name;
-  state.country = country;
-  state.nameLocation = `${state.city}, ${country}`;
-
-  state.coords = data.city.coord;
-
   state.todayWeather.humidity = data.list[0].main.humidity;
 
   state.todayWeather.summary = data.list[0].weather[0].description;
+
+  state.todayWeather.summaryRU = data.list[0].weather[0].description;
 
   state.todayWeather.icon = data.list[0].weather[0].icon;
 
@@ -51,10 +45,6 @@ export default function (data) {
   state.day1.temp = isFar ? func.round(func.celFar(day1Temp)) : func.round(day1Temp);
   state.day2.temp = isFar ? func.round(func.celFar(day2Temp)) : func.round(day2Temp);
   state.day3.temp = isFar ? func.round(func.celFar(day3Temp)) : func.round(day3Temp);
-
-  state.day1.summary = data.list[day1].weather[0].description;
-  state.day2.summary = data.list[day2].weather[0].description;
-  state.day3.summary = data.list[day3].weather[0].description;
 
   state.day1.icon = data.list[day1].weather[0].icon;
   state.day2.icon = data.list[day2].weather[0].icon;

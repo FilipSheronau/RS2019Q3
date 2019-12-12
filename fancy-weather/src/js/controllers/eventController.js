@@ -4,12 +4,16 @@ import getLocation from '../api/getLocation';
 import getWeather from '../api/getWeather';
 import updateView from '../view/updateView';
 import setLang from './langController';
+import translate from './translateController';
+import geoCod from '../api/geoCod';
 
 export default function () {
   async function chain() {
     setLang();
     await getLocation();
+    await geoCod();
     await getWeather();
+    await translate();
     updateView.fullUpdate();
   }
   window.addEventListener('load', async () => {
@@ -18,7 +22,8 @@ export default function () {
 
     document.getElementById('langId').addEventListener('change', (event) => {
       setLang(event.target.value);
-      updateView.langUpdate();
+      translate()
+        .then(() => { updateView.langUpdate(); });
     });
 
     document.getElementById('search-inp').addEventListener('change', () => {

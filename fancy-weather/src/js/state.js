@@ -17,6 +17,7 @@ export default {
     feelsLike: '',
     feelsLikeText: '',
     summary: '',
+    summaryRU: '',
     humidity: '',
     humidityText: '',
     speedWind: '',
@@ -27,19 +28,16 @@ export default {
   day1: {
     weekDay: '',
     temp: '',
-    summary: '',
     icon: '',
   },
   day2: {
     weekDay: '',
     temp: '',
-    summary: '',
     icon: '',
   },
   day3: {
     weekDay: '',
     temp: '',
-    summary: '',
     icon: '',
   },
   searchCityInput: '',
@@ -47,7 +45,6 @@ export default {
   coordsLat: '',
   coordsLon: '',
   errors: {
-    cityN: '',
     emptyFieldSearch: '',
   },
 };
