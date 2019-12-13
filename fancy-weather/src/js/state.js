@@ -17,7 +17,7 @@ export default {
     feelsLike: '',
     feelsLikeText: '',
     summary: '',
-    summaryRU: '',
+    summaryEN: '',
     humidity: '',
     humidityText: '',
     speedWind: '',
@@ -42,8 +42,6 @@ export default {
   },
   searchCityInput: '',
   searchCityButton: '',
-  coordsLat: '',
-  coordsLon: '',
   errors: {
     emptyFieldSearch: '',
   },

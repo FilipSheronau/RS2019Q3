@@ -1,4 +1,5 @@
 import state from '../state';
+import getMap from '../api/getMap';
 
 export default {
   fullUpdate() {
@@ -22,6 +23,7 @@ export default {
     document.querySelector('.day-temp1').innerHTML = `${state.day1.temp}\u00B0`;
     document.querySelector('.day-temp2').innerHTML = `${state.day2.temp}\u00B0`;
     document.querySelector('.day-temp3').innerHTML = `${state.day3.temp}\u00B0`;
+    document.querySelector('.geo-map').setAttribute('src', getMap());
   },
 
   farUpdate() {

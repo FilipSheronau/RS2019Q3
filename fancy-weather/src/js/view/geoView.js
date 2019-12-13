@@ -5,4 +5,10 @@ export default function () {
   render('div', 'main', {
     class: 'geo',
   });
+
+  // main .content .main
+  render('img', '.geo', {
+    src: '',
+    class: 'geo-map',
+  });
 }

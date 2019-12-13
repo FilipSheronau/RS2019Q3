@@ -17,7 +17,7 @@ export default function (data) {
 
   state.todayWeather.summary = data.list[0].weather[0].description;
 
-  state.todayWeather.summaryRU = data.list[0].weather[0].description;
+  state.todayWeather.summaryEN = data.list[0].weather[0].description;
 
   state.todayWeather.icon = data.list[0].weather[0].icon;
 

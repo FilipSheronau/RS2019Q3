@@ -15,8 +15,6 @@ export default function (data) {
   state.todayWeather.speedWindText = lang.speedWindText[state.lang];
   state.todayWeather.speedWindText2 = lang.speedWindText2[state.lang];
   state.searchCityInput = lang.searchCityInput[state.lang];
-  state.coordsLat = lang.coordsLat[state.lang];
-  state.coordsLon = lang.coordsLon[state.lang];
   state.errors.emptyFieldSearch = lang.errors.emptyFieldSearch[state.lang];
   main.getDate();
 }

@@ -19,10 +19,17 @@ export default async function () {
   state.nameLocation = nameLocation;
 
   const trans2 = await getTranslate(
-    `${state.date} ? ${state.todayWeather.summaryRU}`,
+    `${state.date}`,
     language,
   );
-  const [dateVal, summary] = trans2.text[0].split(' ? ');
+  const [dateVal] = trans2.text;
   state.date = dateVal;
+
+  const trans3 = await getTranslate(
+    `${state.todayWeather.summaryEN}`,
+    language,
+  );
+
+  const [summary] = trans3.text;
   state.todayWeather.summary = summary;
 }

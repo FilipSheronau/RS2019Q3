@@ -10,7 +10,7 @@ export default async function () {
       appid: 'f42e7440e7ff7ce0acb6e595cb833a13',
       lat: state.coords.lat,
       lon: state.coords.lon,
-      lang: 'RU',
+      lang: 'EN',
       units: state.units,
     });
     const response = await query.getData();

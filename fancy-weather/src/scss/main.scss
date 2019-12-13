@@ -78,10 +78,16 @@ $color-accent: '63, 81, 181';
 
 main {
   display: flex!important;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
-.geo,.content {
-  flex-grow: 1;  
+.geo,.content {  
+  align-self: center;  
+}
+
+.geo {
+  text-align: center;
 }
 
 .voice-search {
@@ -95,21 +101,18 @@ main {
 .today h4 {
   text-transform: uppercase;
   font-weight: bold;
-  margin: 0;
-  text-align: center;
+  margin: 0;  
 }
 
 .today h6 {
   font-weight: bold;
-  margin: 0;
-  text-align: center;
+  margin: 0;  
 }
 
 .content-center {
-  display: flex;
-  height: 200px;
+  display: flex;  
   align-items: center;
-  justify-content: center;  
+  justify-content: flex-start;  
 }
 
 .voice-search i {
@@ -117,6 +120,7 @@ main {
 }
 .temp {
   display: flex;
+  margin-top: 30px;
 }
 .temp .span-temp {
   display: block;
@@ -127,7 +131,7 @@ main {
 
 .today-icon {
   display: block;
-  margin-top: -70px;  
+  margin-top: -15px;  
 }
 
 .summary {
@@ -211,11 +215,11 @@ main {
 }
 
 .anydays {
-  display: flex;
-  height: 150px;
+  display: flex;  
   align-items: flex-start;
   justify-content: center;
   font-weight: bold;
+  margin-top: 15px;
 }
 
 .anydays .day {
@@ -234,4 +238,6 @@ main {
   font-size: 30px;
 }
 
-
+.geo img {  
+  border-radius: 20px;
+}

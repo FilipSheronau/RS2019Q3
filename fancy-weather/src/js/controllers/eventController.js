@@ -18,6 +18,7 @@ export default function () {
   }
   window.addEventListener('load', async () => {
     await chain();
+
     document.getElementById('switch-1').addEventListener('change', () => { main.setFar(); });
 
     document.getElementById('langId').addEventListener('change', (event) => {
@@ -41,6 +42,7 @@ export default function () {
     document.getElementById('search-button').addEventListener('click', (event) => {
       event.preventDefault();
       if (state.searchValue === '') {
+        // eslint-disable-next-line no-alert
         alert(state.errors.emptyFieldSearch);
       } else {
         chain();
