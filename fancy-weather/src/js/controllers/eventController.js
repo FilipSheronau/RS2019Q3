@@ -1,4 +1,4 @@
-import main from './genericController';
+import generic from './genericController';
 import state from '../state';
 import getLocation from '../api/getLocation';
 import getWeather from '../api/getWeather';
@@ -7,11 +7,13 @@ import setLang from './langController';
 import translate from './translateController';
 import geoCod from '../api/geoCod';
 import getImage from '../api/getImage';
+import speechRecognitionEvent from './speechRecognitionController';
+import storage from './storageController';
 
 export default function () {
   async function chain(setPlaceSearch, isUpdate) {
     updateView.fetchWeatherToggleOn(setPlaceSearch);
-    setLang();
+    setLang(storage.get('lang'));
     await getLocation();
     await geoCod(setPlaceSearch);
     getWeather()
@@ -24,7 +26,7 @@ export default function () {
   window.addEventListener('load', async () => {
     await chain(false, true);
 
-    document.getElementById('switch-1').addEventListener('change', () => { main.setFar(); });
+    document.getElementById('switch-1').addEventListener('change', () => { generic.setFar(); });
 
     document.getElementById('langId').addEventListener('change', (event) => {
       setLang(event.target.value);
@@ -58,6 +60,11 @@ export default function () {
       event.preventDefault();
       chain(true, true);
     });
+
+    document.getElementById('search-inp').addEventListener('focus', updateView.inpFocus);
+
+    speechRecognitionEvent(chain);
+
     setInterval(() => { chain(true, false); }, 60000);
   });
 }

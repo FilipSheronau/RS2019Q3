@@ -1,6 +1,7 @@
 import state from '../state';
 import updateView from '../view/updateView';
 import lang from '../lang';
+import storage from './storageController';
 
 export default {
   getDate() {
@@ -50,6 +51,7 @@ export default {
       state.day2.temp = this.round(this.farCel(state.day2.temp));
       state.day3.temp = this.round(this.farCel(state.day3.temp));
     }
+    storage.set('isFar', state.isFahrenheit);
     updateView.farUpdate();
   },
 

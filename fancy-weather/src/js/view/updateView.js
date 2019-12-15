@@ -3,8 +3,6 @@ import getMap from '../api/getMap';
 
 export default {
   fullUpdate() {
-    console.log('fulupdate');
-    console.log(state);
     document.querySelector('.today h4').innerHTML = state.nameLocation;
     document.querySelector('.today h6').innerHTML = state.date;
     document.querySelector('.temp .span-temp').innerHTML = state.todayWeather.temp;
@@ -27,7 +25,6 @@ export default {
     document.querySelector('.geo-map').setAttribute('src', getMap());
     document.querySelector('.lat').innerHTML = `${state.coordsLat}: ${state.coords.latFormat}`;
     document.querySelector('.lon').innerHTML = `${state.coordsLon}: ${state.coords.lonFormat}`;
-    console.log('fulupdate2');
     this.fetchWeatherToggleOf();
   },
 
@@ -80,5 +77,15 @@ export default {
     document.querySelector('#update-button>.anim-span').classList.add('show-of');
     document.querySelector('#search-button>i').classList.remove('show-of');
     document.querySelector('#search-button>.anim-span').classList.add('show-of');
+  },
+
+  inpFocus() {
+    document.getElementById('search-inp').value = '';
+    document.querySelector('.dirty-label').classList.remove('is-dirty');
+  },
+
+  voiceSearchUpdate(data) {
+    document.querySelector('.dirty-label').classList.add('is-dirty');
+    document.getElementById('search-inp').value = data;
   },
 };

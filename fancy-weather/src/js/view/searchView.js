@@ -13,7 +13,7 @@ export default function () {
 
   // .search form>div div
   render('div', '.search form', {
-    class: 'mdl-textfield mdl-js-textfield',
+    class: 'dirty-label mdl-textfield mdl-js-textfield',
   });
 
   // .search form>div buttton

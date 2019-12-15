@@ -49,7 +49,4 @@ export default function (data) {
   state.day1.icon = data.list[day1].weather[0].icon;
   state.day2.icon = data.list[day2].weather[0].icon;
   state.day3.icon = data.list[day3].weather[0].icon;
-
-  console.log(state);
-  console.log(data);
 }
