@@ -1,5 +1,5 @@
 import state from '../state';
-import func from './mainController';
+import func from './genericController';
 
 export default function (data) {
   const isFar = state.isFahrenheit;

@@ -17,6 +17,16 @@ export default function () {
     class: 'material-icons',
   }, 'autorenew');
 
+  // #update-button .anim-span
+  render('span', '#update-button', {
+    class: 'anim-span show-of',
+  });
+
+  // .search .material-icons
+  render('i', '#update-button span', {
+    class: 'material-icons is-active',
+  }, 'autorenew');
+
   // .control #lang-batton
   render('div', '.control', {
     id: 'lang-batton',

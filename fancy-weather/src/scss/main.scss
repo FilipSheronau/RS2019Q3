@@ -8,6 +8,12 @@
 html, body {
   font-family: "Helvetica","Arial",sans-serif!important;
   font-size: 16px!important;
+  color: #ffffff!important;
+  background-color: rgba(0,0,0, 0.26);
+}
+
+body>div {
+  align-self: center;
 }
 
 header {
@@ -28,8 +34,6 @@ header {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
 }
 
 $color-primary: '63, 81, 181';
@@ -41,7 +45,7 @@ $color-accent: '63, 81, 181';
 }
 
 .search .mdl-textfield {
-  width: 205px!important;
+  width: auto;
 }
 
 .mdl-switch {
@@ -52,7 +56,7 @@ $color-accent: '63, 81, 181';
   display: flex!important;
   justify-content: space-between;
   align-items: center;  
-  background: #dedede70;
+  background: #dedede80;
   border-radius: 15px;
   padding: 0px 10px;
   color: #474545;
@@ -66,7 +70,7 @@ $color-accent: '63, 81, 181';
   display: flex!important;
   justify-content: space-between;
   align-items: center;  
-  background: #dedede70;
+  background: #dedede80;
   border-radius: 15px;
   padding: 0px 10px;
   color: #474545;
@@ -76,10 +80,20 @@ $color-accent: '63, 81, 181';
   margin: 0 0 10px 0;
 }
 
+.search form {
+  display: flex!important;
+  flex-grow: 1;
+}
+
+.search form>div {
+  flex-grow: 1;
+}
+
 main {
   display: flex!important;
   justify-content: space-around;
   flex-wrap: wrap;
+  min-height: 500px;
 }
 
 .geo,.content {  
@@ -160,12 +174,28 @@ main {
 
 .control .mdl-menu,
 .control .mdl-menu__outline {
-  width: 55px!important;
+  width: 55px!important;  
+}
+
+.mdl-menu .selected {
+  background-color: rgb(113, 124, 190)!important;
+}
+
+.mdl-menu__item:hover {
+  background-color: rgb(89, 103, 184)!important;
+}
+
+.mdl-textfield__input {
+  background: none!important;
+}
+
+.control .mdl-menu__outline {
+  background-color: rgb(63, 81, 181);
 }
 
 .control input,
 .control li {
-  color: #474545;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -183,6 +213,7 @@ main {
 
 #toggle-degrees {
   display: block;
+  color: #ffffff;
 }
 
 @keyframes spin {
@@ -191,11 +222,10 @@ main {
   }
 }
 
-#search-button .anim-span {  
+#search-button .anim-span, #update-button .anim-span {  
   animation: spin 800ms infinite linear;
   display: block;
-  padding: 0px;  
-  width: 40px;
+  padding: 0px;
   height: 40px;
 }
 
@@ -203,15 +233,19 @@ main {
   display: none!important;
 }
 
-#search-button .anim-span i {
+#search-button .anim-span i, #update-button .anim-span i{
   margin: 0 0 0 -8px;
   font-size: 40px;
+}
+
+#search-button {
+  margin-right: 0px;
 }
 
 .wrapper {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 15px;  
 }
 
 .anydays {
@@ -240,4 +274,19 @@ main {
 
 .geo img {  
   border-radius: 20px;
+}
+
+#search-inp {
+  color:#ffffff;
+}
+
+.lat {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.lon {
+  font-size: 14px;
+  font-weight: bold;
 }

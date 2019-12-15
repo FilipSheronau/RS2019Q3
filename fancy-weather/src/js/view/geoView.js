@@ -11,4 +11,14 @@ export default function () {
     src: '',
     class: 'geo-map',
   });
+
+  // .lat
+  render('div', '.geo', {
+    class: 'lat',
+  });
+
+  // .lon
+  render('div', '.geo', {
+    class: 'lon',
+  });
 }

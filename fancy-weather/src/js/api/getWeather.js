@@ -5,7 +5,6 @@ import updateView from '../view/updateView';
 
 export default async function () {
   try {
-    updateView.fetchWeatherToggle();
     const query = new Query('https://api.openweathermap.org/data/2.5/forecast', {
       appid: 'f42e7440e7ff7ce0acb6e595cb833a13',
       lat: state.coords.lat,
@@ -17,7 +16,6 @@ export default async function () {
     if (!response) {
       throw response;
     }
-    updateView.fetchWeatherToggle();
     weatherController(response);
   } catch (error) {
     updateView.fetchWeatherToggle();

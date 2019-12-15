@@ -4,13 +4,18 @@ export default {
   searchValue: '',
   location: '',
   nameLocation: '',
+  nameLocationEn: '',
   units: 'metric',
   city: '',
   country: '',
   coords: {
     lat: '',
     lon: '',
+    latFormat: '',
+    lonFormat: '',
   },
+  coordsLat: '',
+  coordsLon: '',
   date: '',
   todayWeather: {
     temp: '',
@@ -40,6 +45,8 @@ export default {
     temp: '',
     icon: '',
   },
+  season: '',
+  hours: '',
   searchCityInput: '',
   searchCityButton: '',
   errors: {

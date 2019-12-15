@@ -1,4 +1,4 @@
-import main from './mainController';
+import main from './genericController';
 import state from '../state';
 import getLocation from '../api/getLocation';
 import getWeather from '../api/getWeather';
@@ -6,18 +6,23 @@ import updateView from '../view/updateView';
 import setLang from './langController';
 import translate from './translateController';
 import geoCod from '../api/geoCod';
+import getImage from '../api/getImage';
 
 export default function () {
-  async function chain() {
+  async function chain(setPlaceSearch, isUpdate) {
+    updateView.fetchWeatherToggleOn(setPlaceSearch);
     setLang();
     await getLocation();
-    await geoCod();
-    await getWeather();
-    await translate();
-    updateView.fullUpdate();
+    await geoCod(setPlaceSearch);
+    getWeather()
+      .then(async () => {
+        getImage(isUpdate);
+        await translate();
+        updateView.fullUpdate();
+      });
   }
   window.addEventListener('load', async () => {
-    await chain();
+    await chain(false, true);
 
     document.getElementById('switch-1').addEventListener('change', () => { main.setFar(); });
 
@@ -35,7 +40,7 @@ export default function () {
       if (event.code === 'Enter') {
         event.preventDefault();
         document.getElementById('search-inp').blur();
-        chain();
+        chain(false, false);
       }
     });
 
@@ -45,9 +50,14 @@ export default function () {
         // eslint-disable-next-line no-alert
         alert(state.errors.emptyFieldSearch);
       } else {
-        chain();
+        chain(false, false);
       }
     });
-    // setInterval(chain, 60000);
+
+    document.getElementById('update-button').addEventListener('click', (event) => {
+      event.preventDefault();
+      chain(true, true);
+    });
+    setInterval(() => { chain(true, false); }, 60000);
   });
 }

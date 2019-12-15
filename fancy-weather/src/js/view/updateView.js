@@ -3,6 +3,7 @@ import getMap from '../api/getMap';
 
 export default {
   fullUpdate() {
+    console.log('fulupdate');
     console.log(state);
     document.querySelector('.today h4').innerHTML = state.nameLocation;
     document.querySelector('.today h6').innerHTML = state.date;
@@ -24,6 +25,10 @@ export default {
     document.querySelector('.day-temp2').innerHTML = `${state.day2.temp}\u00B0`;
     document.querySelector('.day-temp3').innerHTML = `${state.day3.temp}\u00B0`;
     document.querySelector('.geo-map').setAttribute('src', getMap());
+    document.querySelector('.lat').innerHTML = `${state.coordsLat}: ${state.coords.latFormat}`;
+    document.querySelector('.lon').innerHTML = `${state.coordsLon}: ${state.coords.lonFormat}`;
+    console.log('fulupdate2');
+    this.fetchWeatherToggleOf();
   },
 
   farUpdate() {
@@ -51,10 +56,29 @@ export default {
     document.querySelector('.day-temp1').innerHTML = `${state.day1.temp}\u00B0`;
     document.querySelector('.day-temp2').innerHTML = `${state.day2.temp}\u00B0`;
     document.querySelector('.day-temp3').innerHTML = `${state.day3.temp}\u00B0`;
+    document.querySelector('.lat').innerHTML = `${state.coordsLat}: ${state.coords.latFormat}`;
+    document.querySelector('.lon').innerHTML = `${state.coordsLon}: ${state.coords.lonFormat}`;
   },
 
-  fetchWeatherToggle() {
-    document.querySelector('#search-button>i').classList.toggle('show-of');
-    document.querySelector('.anim-span').classList.toggle('show-of');
+  backgroundUpdate(url) {
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundImage = `url('${url}')`;
+  },
+
+  fetchWeatherToggleOn(sw) {
+    if (sw) {
+      document.querySelector('#update-button>i').classList.add('show-of');
+      document.querySelector('#update-button>.anim-span').classList.remove('show-of');
+    } else {
+      document.querySelector('#search-button>i').classList.add('show-of');
+      document.querySelector('#search-button>.anim-span').classList.remove('show-of');
+    }
+  },
+
+  fetchWeatherToggleOf() {
+    document.querySelector('#update-button>i').classList.remove('show-of');
+    document.querySelector('#update-button>.anim-span').classList.add('show-of');
+    document.querySelector('#search-button>i').classList.remove('show-of');
+    document.querySelector('#search-button>.anim-span').classList.add('show-of');
   },
 };

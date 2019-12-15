@@ -36,8 +36,8 @@ export default {
   },
   coordsLon: {
     EN: 'longitude',
-    RU: 'широта',
-    BY: 'шырата',
+    RU: 'долгота',
+    BY: 'даўгата',
   },
   errors: {
     emptyFieldSearch: {

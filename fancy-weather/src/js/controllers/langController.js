@@ -1,6 +1,6 @@
 import state from '../state';
 import lang from '../lang';
-import main from './mainController';
+import main from './genericController';
 
 export default function (data) {
   if (data) state.lang = data;
@@ -16,5 +16,7 @@ export default function (data) {
   state.todayWeather.speedWindText2 = lang.speedWindText2[state.lang];
   state.searchCityInput = lang.searchCityInput[state.lang];
   state.errors.emptyFieldSearch = lang.errors.emptyFieldSearch[state.lang];
+  state.coordsLat = lang.coordsLat[state.lang];
+  state.coordsLon = lang.coordsLon[state.lang];
   main.getDate();
 }

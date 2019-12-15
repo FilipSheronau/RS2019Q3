@@ -28,6 +28,10 @@ export default {
     otherDate.setDate(otherDate.getDate() + 1);
     const day3 = otherDate.getDay();
     state.day3.weekDay = this.weekDayMethod(day3);
+
+    state.season = this.getSeason(date);
+
+    state.hours = this.getH(date);
   },
 
   setFar() {
@@ -68,5 +72,58 @@ export default {
 
   weekDayMethod(x) {
     return lang.weekkdays[x][state.lang];
+  },
+
+  getSeason(date) {
+    let result;
+    const d = date.getMonth();
+    if (d < 2 || d === 11) {
+      result = 'winter';
+    } else if (d < 5) {
+      result = 'spring';
+    } else if (d < 8) {
+      result = 'summer';
+    } else if (d < 11) {
+      result = 'autumn';
+    }
+    return result;
+  },
+
+  getH(date) {
+    let result;
+    const h = date.getHours();
+    if (h > 0 && h < 4) {
+      result = 'night';
+    } else if (h > 3 && h < 12) {
+      result = 'morning';
+    } else if (h > 11 && h < 17) {
+      result = 'day';
+    } else if (h > 16) {
+      result = 'evening';
+    }
+    return result;
+  },
+
+  ddToDms(latV, lngV) {
+    let lat = latV;
+    let lng = lngV;
+    lat = parseFloat(lat);
+    lng = parseFloat(lng);
+    let latResult = (lat >= 0) ? 'N' : 'S';
+    latResult += this.getDms(lat);
+    let lngResult = (lng >= 0) ? 'E' : 'W';
+    lngResult += this.getDms(lng);
+    const dmsResult = [latResult, lngResult];
+    return dmsResult;
+  },
+
+  getDms(v) {
+    let result;
+    const val = Math.abs(v);
+    const valDeg = Math.floor(val);
+    result = `${valDeg}º`;
+    const valMin = Math.floor((val - valDeg) * 60);
+    result += `${valMin}'`;
+    return result;
   },
 };
