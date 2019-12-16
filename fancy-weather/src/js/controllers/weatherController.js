@@ -1,9 +1,20 @@
 import state from '../state';
 import func from './genericController';
+import storage from './storageController';
 
 export default function (data) {
+  if (storage.get('isFar')) state.isFahrenheit = storage.get('isFar');
+  if (state.isFahrenheit === 'true') {
+    state.isFahrenheit = true;
+    document.querySelector('.mdl-switch').classList.add('is-checked');
+    document.getElementById('switch-1').checked = true;
+  } else {
+    state.isFahrenheit = false;
+    document.querySelector('.mdl-switch').classList.remove('is-checked');
+    document.getElementById('switch-1').checked = false;
+  }
   const isFar = state.isFahrenheit;
-  const { temp } = data.list[0].main;
+  const temp = func.round(data.list[0].main.temp);
   const wind = data.list[0].wind.speed;
 
   state.todayWeather.temp = isFar ? func.round(func.celFar(temp)) : func.round(temp);
@@ -38,9 +49,9 @@ export default function (data) {
   const day2 = midFunc(2);
   const day3 = midFunc(3);
 
-  const day1Temp = data.list[day1].main.temp;
-  const day2Temp = data.list[day2].main.temp;
-  const day3Temp = data.list[day3].main.temp;
+  const day1Temp = func.round(data.list[day1].main.temp);
+  const day2Temp = func.round(data.list[day2].main.temp);
+  const day3Temp = func.round(data.list[day3].main.temp);
 
   state.day1.temp = isFar ? func.round(func.celFar(day1Temp)) : func.round(day1Temp);
   state.day2.temp = isFar ? func.round(func.celFar(day2Temp)) : func.round(day2Temp);
