@@ -9,7 +9,6 @@ html, body {
   font-family: "Helvetica","Arial",sans-serif!important;
   font-size: 16px!important;
   color: #ffffff!important;
-  background-color: rgba(0,0,0, 0.26);
 }
 
 body>div {
@@ -293,4 +292,11 @@ main {
 .lon {
   font-size: 14px;
   font-weight: bold;
+}
+
+@media only screen and (max-width : 600px) {
+  .control,
+  .search {
+    width: 100%;
+  }
 }

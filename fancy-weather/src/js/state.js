@@ -49,6 +49,7 @@ export default {
   hours: '',
   searchCityInput: '',
   searchCityButton: '',
+  background: '',
   errors: {
     emptyFieldSearch: '',
   },

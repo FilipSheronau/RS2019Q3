@@ -1,4 +1,5 @@
 import updateView from '../view/updateView';
+import state from '../state';
 
 export default function (data) {
   function randomInteger(max) {
@@ -7,9 +8,24 @@ export default function (data) {
     return Math.floor(rand);
   }
 
+  function imageChange() {
+    let backgroundNow = data.hits[randomInteger(data.total)].webformatURL;
+    if (state.background && state.background !== 'dist/img/bg.gif') {
+      while (backgroundNow.match(/(?<=get\/).{6}/)[0] === state.background.match(/(?<=get\/).{6}/)[0]) {
+        backgroundNow = data.hits[randomInteger(data.total)].webformatURL;
+      }
+    }
+    return backgroundNow;
+  }
+
   if (data && data.total === 1) {
-    updateView.backgroundUpdate(data.hits[0].largeImageURL);
+    state.background = data.hits[0].largeImageURL;
+    updateView.backgroundUpdate(state.background);
   } else if (data && data.total > 1) {
-    updateView.backgroundUpdate(data.hits[randomInteger(data.total)].webformatURL);
+    state.background = imageChange();
+    updateView.backgroundUpdate(state.background);
+  } else {
+    state.background = 'dist/img/bg.gif';
+    updateView.backgroundUpdate(state.background);
   }
 }
