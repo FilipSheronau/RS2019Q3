@@ -1,6 +1,5 @@
 import state from '../state';
 import lang from '../lang';
-import main from './genericController';
 import storage from './storageController';
 
 export default function (data) {
@@ -20,5 +19,4 @@ export default function (data) {
   state.coordsLat = lang.coordsLat[state.lang];
   state.coordsLon = lang.coordsLon[state.lang];
   storage.set('lang', state.lang);
-  main.getDate();
 }

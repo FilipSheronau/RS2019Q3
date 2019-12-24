@@ -17,6 +17,7 @@ export default {
   coordsLat: '',
   coordsLon: '',
   date: '',
+  timeZone: '',
   todayWeather: {
     temp: '',
     feelsLike: '',

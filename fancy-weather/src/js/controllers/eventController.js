@@ -18,6 +18,7 @@ export default function () {
     await geoCod(setPlaceSearch);
     getWeather()
       .then(async () => {
+        generic.getDate();
         getImage(isUpdate);
         await translate();
         updateView.fullUpdate();
@@ -30,8 +31,11 @@ export default function () {
 
     document.getElementById('langId').addEventListener('change', (event) => {
       setLang(event.target.value);
+      generic.getDate();
       translate()
-        .then(() => { updateView.langUpdate(); });
+        .then(() => {
+          updateView.langUpdate();
+        });
     });
 
     document.getElementById('search-inp').addEventListener('change', () => {

@@ -32,6 +32,8 @@ export default function (data) {
 
   state.todayWeather.icon = data.list[0].weather[0].icon;
 
+  state.timeZone = data.city.timezone;
+
   const startOtherDay = (24 - data.list[0].dt_txt.substr(-8, 2)) / 3;
   const midFunc = (x) => {
     let middleTemp = 0;

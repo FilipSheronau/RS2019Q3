@@ -11,23 +11,28 @@ export default {
       month: 'long',
       day: 'numeric',
       weekday: 'short',
-      timezone: 'UTC',
       hour: 'numeric',
       minute: 'numeric',
     };
+    date.setTime(date.getTime() + (date.getTimezoneOffset() * 60 * 1000)
+    + (state.timeZone * 1000));
+    // state.date.weekDay = date.getUTCDay();
+    // state.date.time = `${date.getUTCHours()}:${date.getUTCMinutes()}`;
+    // state.date.dayOfMonth = date.getUTCDate();
+    // state.date.month = date.getUTCMonth();
+    // state.date.year = date.getUTCFullYear();
     state.date = date.toLocaleString('RU', options);
 
-    const otherDate = new Date();
-    otherDate.setDate(otherDate.getDate() + 1);
-    const day1 = otherDate.getDay();
+    date.setDate(date.getDate() + 1);
+    const day1 = date.getDay();
     state.day1.weekDay = this.weekDayMethod(day1);
 
-    otherDate.setDate(otherDate.getDate() + 1);
-    const day2 = otherDate.getDay();
+    date.setDate(date.getDate() + 1);
+    const day2 = date.getDay();
     state.day2.weekDay = this.weekDayMethod(day2);
 
-    otherDate.setDate(otherDate.getDate() + 1);
-    const day3 = otherDate.getDay();
+    date.setDate(date.getDate() + 1);
+    const day3 = date.getDay();
     state.day3.weekDay = this.weekDayMethod(day3);
 
     state.season = this.getSeason(date);

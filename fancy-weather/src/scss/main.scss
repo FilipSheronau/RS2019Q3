@@ -111,10 +111,6 @@ main {
   margin-top: 20px;
 }
 
-.day>div {
-  margin-bottom: 15px;
-}
-
 .today h4 {
   text-transform: uppercase;
   font-weight: bold;
@@ -298,5 +294,12 @@ main {
   .control,
   .search {
     width: 100%;
+  }
+
+  .day>div {
+    margin-bottom: 15px;
+  }
+  .day {
+    text-align: center;
   }
 }
