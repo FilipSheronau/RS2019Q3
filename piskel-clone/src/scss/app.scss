@@ -35,7 +35,7 @@ main {
   height: calc(100vh - 36px - 20px);
 }
 
-.pen-size {
+.tool-size {
   display: flex;
   width: 100px;
   list-style-type: none;
@@ -44,7 +44,7 @@ main {
   justify-content: center;
 }
 
-.pen-size li {
+.tool-size li {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,15 +56,15 @@ main {
   cursor: pointer;
 }
 
-.pen-size li:hover {
+.tool-size li:hover {
   border-color: #888888;
 }
 
-.pen-size li.active {
+.tool-size li.active {
   border: 2px solid #ffd700;
 }
 
-.pen-size li div {
+.tool-size li div {
   background-color: #ffffff;
 }
 
@@ -171,7 +171,6 @@ main {
 .primary {
   position: absolute;
   border: solid 4px #444444;
-  background-color: #000000;
   box-sizing: border-box;
   width: 46px;
   height: 46px;
@@ -182,7 +181,6 @@ main {
 .secondary {
   position: absolute;
   border: solid 4px #444444;
-  background-color: #ffffff;
   box-sizing: border-box;
   bottom: 0;
   right: 0;
@@ -340,14 +338,13 @@ input[type=color] {
   background: url('../img/canvas-bg.png') repeat;
 }
 
-.canvas-container {
+.main-canvas-container {
   background: url('../img/canvas-bg.png') repeat;
 }
 
-#canvas {
+.main-canvas-container canvas {
   image-rendering: pixelated;
   width: 512px;
-  height: 512px;
 }
 
 .range-container {
@@ -359,4 +356,24 @@ input[type=color] {
 
 .display-fps {
   width: 50px;
+}
+
+.cur-pen {
+  cursor: url('../img/pen.png') 1 14, pointer;
+}
+
+.cur-paint-bucket {
+  cursor: url('../img/paint-bucket.png') 14 14, pointer;
+}
+
+.cur-stroke {
+  cursor: url('../img/stroke.png') 1 14, pointer;
+}
+
+.cur-eraser {
+  cursor: url('../img/eraser.png') 3 14, pointer;
+}
+
+.cur-color-picker {
+  cursor: url('../img/picker.png') 2 15, pointer;
 }

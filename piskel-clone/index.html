@@ -14,19 +14,19 @@
     </header>
     <main>
       <div class="left">
-        <ul class="pen-size">
-          <li class="unit-1 active"><div></div></li>
-          <li class="unit-2"><div></div></li>
-          <li class="unit-3"><div></div></li>          
-          <li class="unit-4"><div></div></li>
+        <ul class="tool-size">
+          <li class="unit-1" data-size="1"><div></div></li>
+          <li class="unit-2" data-size="2"><div></div></li>
+          <li class="unit-3" data-size="3"><div></div></li>          
+          <li class="unit-4" data-size="4"><div></div></li>
         </ul>
         <ul class="tools">
-          <li class="pen active"><div></div></li>
-          <li class="stroke"><div></div></li>
-          <li class="paint-bucket"><div></div></li>          
-          <li class="eraser"><div></div></li>
-          <li class="color-picker"><div></div></li>
-          <li class="canvas-clear"><div></div></li>
+          <li class="pen" data-tool="pen"><div></div></li>
+          <li class="stroke" data-tool="stroke"><div></div></li>
+          <li class="paint-bucket" data-tool="paintBucket"><div></div></li>          
+          <li class="eraser" data-tool="eraser"><div></div></li>
+          <li class="color-picker" data-tool="colorPicker"><div></div></li>
+          <li class="canvas-clear" data-tool="canvasClear"><div></div></li>
         </ul>
         <div class="color-select">
           <label for="primary"><div class="primary"></div></label>
@@ -46,15 +46,14 @@
         </div>
       </div>
       <div class="content">
-        <div class="canvas-container">
-          <canvas id="canvas" width="128" height="128"></canvas>
+        <div class="main-canvas-container">
         </div>
       </div>
       <div class="right">
         <ul class="canvas-size">
-          <li class="active">32x32</li>
-          <li>64x64</li>
-          <li>128x128</li>
+          <li data-size="32">32x32</li>
+          <li data-size="64">64x64</li>
+          <li data-size="128">128x128</li>
         </ul>
         <div class="animated-preview-container">
         </div>
@@ -64,5 +63,6 @@
       </div>
     </main>
   </div>
+  <script src="./dist/js/bundle.js"></script>
 </body>
 </html>
