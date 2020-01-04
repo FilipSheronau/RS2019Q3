@@ -5,6 +5,7 @@ const state = {
   toolSize: 1,
   primaryColor: '#000000',
   secondaryColor: '#ffffff',
+  frames: {},
 };
 
 export { state as default };

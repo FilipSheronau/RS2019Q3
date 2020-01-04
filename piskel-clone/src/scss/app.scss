@@ -146,6 +146,11 @@ main {
   background-position: -228px -92px;
 }
 
+.paint-all>div {
+  background-image: url('../img/icons.png');
+  background-position: -228px -138px;
+}
+
 .eraser>div {
   background-image: url('../img/icons.png');
   background-position: -46px -228px;
@@ -246,6 +251,10 @@ main {
 
 .frame-list li:hover {
   border-color: #888888;
+}
+
+.frame-list li.active {
+
 }
 
 input[type=color] {

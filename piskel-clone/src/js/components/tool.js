@@ -2,10 +2,9 @@ import state from '../state';
 import Pen from './tools/pen';
 import Stroke from './tools/stroke';
 import PaintBucket from './tools/paintBucket';
+import PaintAll from './tools/paintAll';
 import Eraser from './tools/eraser';
 import ColorPicker from './tools/colorPicker';
-// import colorPicker from './tools/colorPicker';
-// import canvasClear from './tools/canvasClear';
 
 export default class Tool {
   constructor() {
@@ -16,6 +15,7 @@ export default class Tool {
     this.stroke = null;
     this.eraser = null;
     this.paintBucket = null;
+    this.paintAll = null;
     this.colorPicker = null;
   }
 
@@ -26,6 +26,7 @@ export default class Tool {
     this.stroke = new Stroke(mainCanvas, staticMethods);
     this.eraser = new Eraser(mainCanvas, staticMethods);
     this.paintBucket = new PaintBucket(mainCanvas, staticMethods);
+    this.paintAll = new PaintAll(mainCanvas, staticMethods);
     this.colorPicker = new ColorPicker(mainCanvas, staticMethods, primaryColor);
     document.querySelector(`.tools li[data-tool='${this.tool}']`).classList.add('active');
     this.loadToolEvents();
@@ -67,6 +68,10 @@ export default class Tool {
       case 'paintBucket':
         this.paintBucket.events();
         this.paintBucket.cursor();
+        break;
+      case 'paintAll':
+        this.paintAll.events();
+        this.paintAll.cursor();
         break;
       case 'eraser':
         this.eraser.events();
