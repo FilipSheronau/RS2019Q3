@@ -9,7 +9,6 @@ import ColorPicker from './tools/colorPicker';
 export default class Tool {
   constructor() {
     this.tool = null;
-    this.canvas = null;
     this.methods = null;
     this.pen = null;
     this.stroke = null;
@@ -19,15 +18,14 @@ export default class Tool {
     this.colorPicker = null;
   }
 
-  load(mainCanvas, staticMethods, primaryColor) {
+  load() {
     this.tool = state.tool;
-    this.canvas = mainCanvas;
-    this.pen = new Pen(mainCanvas, staticMethods);
-    this.stroke = new Stroke(mainCanvas, staticMethods);
-    this.eraser = new Eraser(mainCanvas, staticMethods);
-    this.paintBucket = new PaintBucket(mainCanvas, staticMethods);
-    this.paintAll = new PaintAll(mainCanvas, staticMethods);
-    this.colorPicker = new ColorPicker(mainCanvas, staticMethods, primaryColor);
+    this.pen = new Pen();
+    this.stroke = new Stroke();
+    this.eraser = new Eraser();
+    this.paintBucket = new PaintBucket();
+    this.paintAll = new PaintAll();
+    this.colorPicker = new ColorPicker();
     document.querySelector(`.tools li[data-tool='${this.tool}']`).classList.add('active');
     this.loadToolEvents();
   }
@@ -44,18 +42,20 @@ export default class Tool {
           state.tool = this.tool;
           this.loadToolEvents();
         } else {
-          this.canvas.ctx.clearRect(0, 0, state.canvasSize, state.canvasSize);
+          state.mainCanvasCtx.clearRect(0, 0, state.canvasSize, state.canvasSize);
+          const image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+          state.frameObj.clear(image);
         }
       }
     }
   }
 
   loadToolEvents() {
-    this.canvas.canvas.onmousedown = null;
-    this.canvas.canvas.onmouseup = null;
-    this.canvas.canvas.onmouseout = null;
-    this.canvas.canvas.onmousemove = null;
-    this.canvas.canvas.onmouseover = null;
+    state.mainCanvas.onmousedown = null;
+    state.mainCanvas.onmouseup = null;
+    state.mainCanvas.onmouseout = null;
+    state.mainCanvas.onmousemove = null;
+    state.mainCanvas.onmouseover = null;
     switch (this.tool) {
       case 'pen':
         this.pen.events();

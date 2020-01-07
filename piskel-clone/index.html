@@ -38,9 +38,7 @@
         </div>
       </div>
       <div class="frames">
-        <ul class="frame-list">
-          <li><canvas width="96" height="96" class="frame-canvas"></canvas></li>
-        </ul>
+        <ul class="frame-list"></ul>
         <div class="add-frame">
           <div class="add-frame-logo"></div>
           <div class="add-frame-note">Add new frame</div>
@@ -64,6 +62,15 @@
       </div>
     </main>
   </div>
+  <template id="frame-el">
+    <li class="frame">
+      <div class="number-frame"></div>
+      <div class="del-frame"><span></span></div>
+      <div class="copy-frame"><span></span></div>
+      <div class="drag-frame"><span></span></div>
+      <canvas class="frame-canvas"></canvas>
+    </li>
+  </template>
   <script src="./dist/js/bundle.js"></script>
 </body>
 </html>

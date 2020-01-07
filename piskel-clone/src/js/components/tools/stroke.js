@@ -1,28 +1,28 @@
 import state from '../../state';
+import staticMethods from '../staticMethods';
 
 export default class Stroke {
-  constructor(canvas, methods) {
-    this.canvas = canvas.canvas;
-    this.ctx = canvas.ctx;
-    this.methods = methods;
+  constructor() {
     this.image = null;
     this.permitDraw = false;
     this.firstPoint = {
       left: null,
       top: null,
     };
+    this.canvas = null;
   }
 
   events() {
+    this.canvas = state.mainCanvas;
     this.canvas.onmouseover = (event) => { this.over(event); };
     this.canvas.onmouseout = () => { this.out(); };
     this.canvas.onmousedown = (event) => { this.startDraw(event); };
     this.canvas.onmousemove = (event) => { this.draw(event); };
     this.canvas.onmouseup = (event) => { this.stopDraw(event); };
-    document.body.onmouseup = (event) => { this.stopDraw(event); };
   }
 
   cursor() {
+    this.canvas = state.mainCanvas;
     this.canvas.classList.remove('cur-pen');
     this.canvas.classList.add('cur-stroke');
     this.canvas.classList.remove('cur-paint-bucket');
@@ -32,11 +32,11 @@ export default class Stroke {
 
   over(data) {
     if (this.permitDraw !== true) {
-      this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
-      this.firstPoint.left = this.methods.getCoords(data).left;
-      this.firstPoint.top = this.methods.getCoords(data).top;
-      this.ctx.fillStyle = '#88888850';
-      this.ctx.fillRect(
+      this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+      this.firstPoint.left = staticMethods.getCoords(data).left;
+      this.firstPoint.top = staticMethods.getCoords(data).top;
+      state.mainCanvasCtx.fillStyle = '#88888850';
+      state.mainCanvasCtx.fillRect(
         this.firstPoint.left - Math.floor(state.toolSize / 2),
         this.firstPoint.top - Math.floor(state.toolSize / 2),
         state.toolSize,
@@ -46,25 +46,27 @@ export default class Stroke {
   }
 
   out() {
-    if (this.permitDraw !== true) this.ctx.putImageData(this.image, 0, 0);
+    if (this.permitDraw !== true) state.mainCanvasCtx.putImageData(this.image, 0, 0);
   }
 
   startDraw(data) {
     this.permitDraw = true;
-    this.firstPoint.left = this.methods.getCoords(data).left;
-    this.firstPoint.top = this.methods.getCoords(data).top;
-    this.ctx.fillStyle = state.primaryColor;
-    this.ctx.fillRect(
+    this.firstPoint.left = staticMethods.getCoords(data).left;
+    this.firstPoint.top = staticMethods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = state.primaryColor;
+    state.mainCanvasCtx.fillRect(
       this.firstPoint.left - Math.floor(state.toolSize / 2),
       this.firstPoint.top - Math.floor(state.toolSize / 2),
       state.toolSize,
       state.toolSize,
     );
-    this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    state.frameObj.update(this.image);
   }
 
   stopDraw() {
-    this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    state.frameObj.update(this.image);
     this.permitDraw = false;
     this.firstPoint.left = null;
     this.firstPoint.top = null;
@@ -72,9 +74,9 @@ export default class Stroke {
 
   draw(data) {
     if (this.permitDraw === true) {
-      this.ctx.putImageData(this.image, 0, 0);
-      const xx = this.methods.getCoords(data).left;
-      const yy = this.methods.getCoords(data).top;
+      state.mainCanvasCtx.putImageData(this.image, 0, 0);
+      const xx = staticMethods.getCoords(data).left;
+      const yy = staticMethods.getCoords(data).top;
       const x = this.firstPoint.left;
       const y = this.firstPoint.top;
       const dx = Math.abs(xx - x);
@@ -87,7 +89,7 @@ export default class Stroke {
       let x1 = x;
       let y1 = y;
       while (!end) {
-        this.ctx.fillRect(
+        state.mainCanvasCtx.fillRect(
           x1 - Math.floor(state.toolSize / 2),
           y1 - Math.floor(state.toolSize / 2),
           state.toolSize,
@@ -108,11 +110,11 @@ export default class Stroke {
         }
       }
     } else {
-      this.ctx.putImageData(this.image, 0, 0);
-      this.firstPoint.left = this.methods.getCoords(data).left;
-      this.firstPoint.top = this.methods.getCoords(data).top;
-      this.ctx.fillStyle = '#88888850';
-      this.ctx.fillRect(
+      state.mainCanvasCtx.putImageData(this.image, 0, 0);
+      this.firstPoint.left = staticMethods.getCoords(data).left;
+      this.firstPoint.top = staticMethods.getCoords(data).top;
+      state.mainCanvasCtx.fillStyle = '#88888850';
+      state.mainCanvasCtx.fillRect(
         this.firstPoint.left - Math.floor(state.toolSize / 2),
         this.firstPoint.top - Math.floor(state.toolSize / 2),
         state.toolSize,

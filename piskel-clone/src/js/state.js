@@ -3,9 +3,12 @@ const state = {
   canvasStyleSize: 512,
   tool: 'pen',
   toolSize: 1,
-  primaryColor: '#000000',
-  secondaryColor: '#ffffff',
-  frames: {},
+  primaryColor: '#004600',
+  secondaryColor: '#ff56ff',
+  mainCanvas: null,
+  mainCanvasCtx: null,
+  frames: [],
+  activeFrame: null,
 };
 
 export { state as default };

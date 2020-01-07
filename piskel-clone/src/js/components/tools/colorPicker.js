@@ -2,11 +2,8 @@ import state from '../../state';
 import staticMethods from '../staticMethods';
 
 export default class ColorPicker {
-  constructor(canvas, methods, primaryColor) {
-    this.canvas = canvas.canvas;
-    this.primaryColor = primaryColor;
-    this.ctx = canvas.ctx;
-    this.methods = methods;
+  constructor() {
+    this.canvas = null;
     this.image = null;
     this.firstPoint = {
       left: null,
@@ -15,6 +12,7 @@ export default class ColorPicker {
   }
 
   events() {
+    this.canvas = state.mainCanvas;
     this.canvas.onmouseover = (event) => { this.over(event); };
     this.canvas.onmouseout = (event) => { this.out(event); };
     this.canvas.onmousedown = (event) => { this.picker(event); };
@@ -22,6 +20,7 @@ export default class ColorPicker {
   }
 
   cursor() {
+    this.canvas = state.mainCanvas;
     this.canvas.classList.remove('cur-pen');
     this.canvas.classList.remove('cur-stroke');
     this.canvas.classList.remove('cur-paint-bucket');
@@ -30,11 +29,11 @@ export default class ColorPicker {
   }
 
   over(data) {
-    this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
-    this.firstPoint.left = this.methods.getCoords(data).left;
-    this.firstPoint.top = this.methods.getCoords(data).top;
-    this.ctx.fillStyle = '#88888850';
-    this.ctx.fillRect(
+    this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    this.firstPoint.left = staticMethods.getCoords(data).left;
+    this.firstPoint.top = staticMethods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = '#88888850';
+    state.mainCanvasCtx.fillRect(
       this.firstPoint.left,
       this.firstPoint.top,
       1,
@@ -43,11 +42,11 @@ export default class ColorPicker {
   }
 
   move(data) {
-    this.ctx.putImageData(this.image, 0, 0);
-    this.firstPoint.left = this.methods.getCoords(data).left;
-    this.firstPoint.top = this.methods.getCoords(data).top;
-    this.ctx.fillStyle = '#88888850';
-    this.ctx.fillRect(
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    this.firstPoint.left = staticMethods.getCoords(data).left;
+    this.firstPoint.top = staticMethods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = '#88888850';
+    state.mainCanvasCtx.fillRect(
       this.firstPoint.left,
       this.firstPoint.top,
       1,
@@ -56,14 +55,14 @@ export default class ColorPicker {
   }
 
   out() {
-    this.ctx.putImageData(this.image, 0, 0);
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
   }
 
   picker(data) {
-    this.ctx.putImageData(this.image, 0, 0);
-    const startX = this.methods.getCoords(data).left;
-    const startY = this.methods.getCoords(data).top;
-    const dstImg = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    const startX = staticMethods.getCoords(data).left;
+    const startY = staticMethods.getCoords(data).top;
+    const dstImg = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
     const dstData = dstImg.data;
     const startPos = staticMethods.getPixelPos(startX, startY);
     const startColor = {
@@ -74,6 +73,6 @@ export default class ColorPicker {
     };
     const newColor = staticMethods.rgbToHex(startColor);
     this.over(data);
-    if (newColor) this.primaryColor.setColor(newColor);
+    if (newColor) state.primaryColorObj.setColor(newColor);
   }
 }

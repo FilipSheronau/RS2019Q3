@@ -233,13 +233,15 @@ main {
   background: transparent;
 }
 
-.frame-list {  
+.frame-list {
+  position: relative;
   list-style-type: none;
   box-sizing: border-box;
   padding: 0;
   margin: 0;  
 }
 .frame-list li {
+  position: relative;
   box-sizing: border-box;
   border: solid 3px #444444;
   border-radius: 3px;
@@ -253,8 +255,101 @@ main {
   border-color: #888888;
 }
 
-.frame-list li.active {
+.frame-list li:hover .del-frame,
+.frame-list li:hover .copy-frame,
+.frame-list li:hover .drag-frame {
+  display: block;
+}
 
+.frame-list li.active {
+  border-color: #ffd700;
+}
+
+.frame-canvas {
+  image-rendering: pixelated;
+  width: 96px;
+  height: 96px;
+}
+
+.number-frame {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #ffd700;
+  border-radius: 0 0 3px 0;
+  color: #000000;
+  text-align: center;
+  padding-top: 7px;
+  font-weight: bold;
+}
+
+.del-frame {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #ffd700;
+  border-radius: 0 0 0 3px;
+  background-color: #88888850;
+  cursor: pointer;
+}
+
+.del-frame span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/icons.png');
+  background-position: -274px -106px;
+}
+
+.copy-frame {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #ffd700;
+  border-radius: 3px 0 0 0;
+  background-color: #88888850;
+  cursor: pointer;
+}
+
+.copy-frame span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/icons.png');
+  background-position: -274px -76px;
+}
+
+.drag-frame {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #ffd700;
+  border-radius: 0 3px 0 0;
+  background-color: #88888850;
+  cursor: pointer;
+}
+
+.drag-frame span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/icons.png');
+  background-position: -274px -46px;
 }
 
 input[type=color] {
@@ -277,6 +372,7 @@ input[type=color] {
   border-color: #888888;
   cursor: pointer;
 }
+
 .add-frame-logo {
   width: 26px;
   height: 26px;

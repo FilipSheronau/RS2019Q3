@@ -1,18 +1,8 @@
 import state from '../state';
 
 export default class StaticMethods {
-  constructor() {
-    this.canvas = null;
-    this.ctx = null;
-  }
-
-  load(mainCanvas) {
-    this.canvas = mainCanvas.canvas;
-    this.ctx = this.canvas.ctx;
-  }
-
-  getCoords(data) {
-    const box = this.canvas.getBoundingClientRect();
+  static getCoords(data) {
+    const box = state.mainCanvas.getBoundingClientRect();
     return {
       top: Math.floor((data.pageY - (box.top + window.pageYOffset))
        / (state.canvasStyleSize / state.canvasSize)),

@@ -5,11 +5,9 @@ export default class Color {
     this.name = cl;
     this.nameColor = `${cl}Color`;
     this.color = null;
-    this.canvas = null;
   }
 
-  load(mainCanvas) {
-    this.canvas = mainCanvas;
+  load() {
     this.color = state[this.nameColor];
     document.getElementById(this.name).value = this.color;
     document.querySelector(`.${this.name}`).style.backgroundColor = this.color;
@@ -28,7 +26,8 @@ export default class Color {
     state[this.nameColor] = this.color;
   }
 
-  change(anotherColor) {
+  change() {
+    const anotherColor = state.secondaryColorObj;
     const tempColor = this.color;
     state[this.nameColor] = state[anotherColor.nameColor];
     state[anotherColor.nameColor] = tempColor;
@@ -36,9 +35,5 @@ export default class Color {
     document.getElementById(this.name).value = this.color;
     document.querySelector(`.${this.name}`).style.backgroundColor = this.color;
     anotherColor.load();
-  }
-
-  updateColor() {
-    this.canvas.ctx.fillStyle = state.primaryColor;
   }
 }

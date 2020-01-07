@@ -2,10 +2,8 @@ import state from '../../state';
 import staticMethods from '../staticMethods';
 
 export default class PaintBucket {
-  constructor(canvas, methods) {
-    this.canvas = canvas.canvas;
-    this.ctx = canvas.ctx;
-    this.methods = methods;
+  constructor() {
+    this.canvas = null;
     this.image = null;
     this.firstPoint = {
       left: null,
@@ -14,6 +12,7 @@ export default class PaintBucket {
   }
 
   events() {
+    this.canvas = state.mainCanvas;
     this.canvas.onmouseover = (event) => { this.over(event); };
     this.canvas.onmouseout = (event) => { this.out(event); };
     this.canvas.onmousedown = (event) => { this.fill(event); };
@@ -21,6 +20,7 @@ export default class PaintBucket {
   }
 
   cursor() {
+    this.canvas = state.mainCanvas;
     this.canvas.classList.remove('cur-pen');
     this.canvas.classList.remove('cur-stroke');
     this.canvas.classList.add('cur-paint-bucket');
@@ -29,11 +29,11 @@ export default class PaintBucket {
   }
 
   over(data) {
-    this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
-    this.firstPoint.left = this.methods.getCoords(data).left;
-    this.firstPoint.top = this.methods.getCoords(data).top;
-    this.ctx.fillStyle = '#88888850';
-    this.ctx.fillRect(
+    this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    this.firstPoint.left = staticMethods.getCoords(data).left;
+    this.firstPoint.top = staticMethods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = '#88888850';
+    state.mainCanvasCtx.fillRect(
       this.firstPoint.left,
       this.firstPoint.top,
       1,
@@ -42,11 +42,11 @@ export default class PaintBucket {
   }
 
   move(data) {
-    this.ctx.putImageData(this.image, 0, 0);
-    this.firstPoint.left = this.methods.getCoords(data).left;
-    this.firstPoint.top = this.methods.getCoords(data).top;
-    this.ctx.fillStyle = '#88888850';
-    this.ctx.fillRect(
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    this.firstPoint.left = staticMethods.getCoords(data).left;
+    this.firstPoint.top = staticMethods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = '#88888850';
+    state.mainCanvasCtx.fillRect(
       this.firstPoint.left,
       this.firstPoint.top,
       1,
@@ -55,16 +55,16 @@ export default class PaintBucket {
   }
 
   out() {
-    this.ctx.putImageData(this.image, 0, 0);
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
   }
 
   fill(data) {
-    this.ctx.fillStyle = state.primaryColor;
-    this.ctx.putImageData(this.image, 0, 0);
-    const startX = this.methods.getCoords(data).left;
-    const startY = this.methods.getCoords(data).top;
+    state.mainCanvasCtx.fillStyle = state.primaryColor;
+    state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    const startX = staticMethods.getCoords(data).left;
+    const startY = staticMethods.getCoords(data).top;
     const fillColor = staticMethods.colorToRgba(state.primaryColor);
-    const dstImg = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    const dstImg = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
     const dstData = dstImg.data;
     const startPos = staticMethods.getPixelPos(startX, startY);
     let startColor = {
@@ -128,7 +128,8 @@ export default class PaintBucket {
         currentPos += state.canvasSize * 4;
       }
     }
-    this.ctx.putImageData(dstImg, 0, 0);
-    this.image = this.ctx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    state.mainCanvasCtx.putImageData(dstImg, 0, 0);
+    this.image = state.mainCanvasCtx.getImageData(0, 0, state.canvasSize, state.canvasSize);
+    state.frameObj.update(this.image);
   }
 }
