@@ -1,0 +1,21 @@
+.animated-preview-container {
+  width: 200px;
+  height: 200px;
+  background: url('../img/canvas-bg.png') repeat;
+}
+
+.range-container {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  align-items: center;
+}
+
+.display-fps {
+  width: 50px;
+}
+
+.animated-preview-container canvas {
+  image-rendering: pixelated;
+  width: 200px;
+}

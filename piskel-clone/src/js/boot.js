@@ -1,13 +1,14 @@
 import state from './state';
-import CanvasSize from './components/canvasSize';
+import CanvasSize from './components/canvas/canvasSize';
 import Tool from './components/tool';
 import ToolSize from './components/toolSize';
 import Color from './components/color';
-import Canvas from './components/canvas';
+import Canvas from './components/canvas/canvas';
 import event from './components/events';
-import StaticMethods from './components/staticMethods';
 import Frame from './components/frames/frame';
 import FrameDrag from './components/frames/frameDrag';
+import Player from './components/animation/player';
+import PlayerControl from './components/animation/playerControl';
 
 state.mainCanvasObj = new Canvas();
 state.toolObj = new Tool();
@@ -15,7 +16,8 @@ state.toolSizeObj = new ToolSize();
 state.primaryColorObj = new Color('primary');
 state.secondaryColorObj = new Color('secondary');
 state.canvasSizeObj = new CanvasSize();
-state.staticMethodsObj = new StaticMethods();
 state.frameObj = new Frame();
 state.frameDragObj = new FrameDrag();
+state.playerObj = new Player();
+state.playerControlObj = new PlayerControl();
 event();

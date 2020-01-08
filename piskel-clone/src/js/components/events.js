@@ -9,6 +9,7 @@ export default function events() {
     state.primaryColorObj.load();
     state.secondaryColorObj.load();
     state.frameObj.load();
+    state.playerObj.load();
   };
   document.querySelector('.canvas-size').onclick = (event) => { state.canvasSizeObj.set(event.target); };
   document.querySelector('.tools').onclick = (event) => { state.toolObj.set(event.target); };
@@ -25,4 +26,6 @@ export default function events() {
   document.querySelector('.frames').onmousedown = (event) => { state.frameDragObj.drag(event); };
   document.querySelector('.frames').ondragstart = () => false;
   document.querySelector('.frames').onmousemove = (event) => { state.frameDragObj.sort(event); };
+  document.getElementById('range-fps').onmousedown = (event) => { state.playerControlObj.set(event.target.value); };
+  document.getElementById('range-fps').oninput = (event) => { state.playerControlObj.set(event.target.value); };
 }

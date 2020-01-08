@@ -8,7 +8,9 @@ const state = {
   mainCanvas: null,
   mainCanvasCtx: null,
   frames: [],
+  frameImages: [],
   activeFrame: null,
+  playerFps: 10,
 };
 
 export { state as default };

@@ -10,6 +10,7 @@ export default class FrameDrag {
     this.tempEl = null;
     this.liCollection = null;
     this.dragEl = null;
+    this.direction = null;
   }
 
   drag(e) {
@@ -61,7 +62,7 @@ export default class FrameDrag {
       this.el.hidden = false;
       if (!overEl.closest('.frame')) return;
       overEl = overEl.closest('.frame');
-      overEl = overEl.dataset.id;
+      overEl = Number(overEl.dataset.id);
       this.createTempEl();
       const prevEl = document.querySelector(`.frame[data-id="${overEl}"]`);
       if (overEl < this.indOfEl()) {
@@ -71,12 +72,31 @@ export default class FrameDrag {
           document.querySelector('.temp-li').remove();
           prevEl.before(this.tempEl);
         }
-      } else if (overEl >= this.indOfEl()) {
+        this.direction = 'downToUp';
+      } else if (overEl > this.indOfEl()) {
+        // console.log('2');
         if (!document.querySelector('.temp-li')) {
           prevEl.after(this.tempEl);
         } else {
           document.querySelector('.temp-li').remove();
           prevEl.after(this.tempEl);
+        }
+        this.direction = 'UpToDown';
+      } else if (overEl === this.indOfEl()) {
+        if (this.direction === 'UpToDown') {
+          if (!document.querySelector('.temp-li')) {
+            prevEl.before(this.tempEl);
+          } else {
+            document.querySelector('.temp-li').remove();
+            prevEl.before(this.tempEl);
+          }
+        } else if (this.direction === 'downToUp') {
+          if (!document.querySelector('.temp-li')) {
+            prevEl.after(this.tempEl);
+          } else {
+            document.querySelector('.temp-li').remove();
+            prevEl.after(this.tempEl);
+          }
         }
       }
     }

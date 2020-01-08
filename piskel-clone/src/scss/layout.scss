@@ -1,0 +1,39 @@
+.main-canvas-container {
+  background: url('../img/canvas-bg.png') repeat;
+}
+
+.main-canvas-container canvas {
+  image-rendering: pixelated;
+  width: 512px;
+}
+
+.canvas-size {
+  display: flex;
+  list-style-type: none;
+  padding: 0;  
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 10px 0;
+}
+
+.canvas-size li {
+  width: 65px;
+  height: 30px;
+  box-sizing: border-box;
+  margin: 1px;
+  background-color: #3a3a3a;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  border: 3px solid #444444;
+  padding-top: 4px;
+}
+
+.canvas-size li:hover {
+  border: 3px solid #888888;
+}
+
+.canvas-size li.active {
+  border: 3px solid #ffd700;
+}

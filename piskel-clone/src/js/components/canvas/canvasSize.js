@@ -1,4 +1,4 @@
-import state from '../state';
+import state from '../../state';
 
 export default class CanvasSize {
   constructor() {
@@ -27,6 +27,9 @@ export default class CanvasSize {
     state.mainCanvas.setAttribute('width', this.canvasSize);
     state.mainCanvas.setAttribute('height', this.canvasSize);
     state.mainCanvasCtx.clearRect(0, 0, this.canvasSize, this.canvasSize);
+    state.playerCanvas.setAttribute('width', this.canvasSize);
+    state.playerCanvas.setAttribute('height', this.canvasSize);
+    state.playerCanvasCtx.clearRect(0, 0, this.canvasSize, this.canvasSize);
     state.frameObj.clearFrameList();
   }
 }

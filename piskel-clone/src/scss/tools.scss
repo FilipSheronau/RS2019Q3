@@ -1,0 +1,208 @@
+.tool-size {
+  display: flex;
+  width: 100px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px;
+  justify-content: center;
+}
+
+.tool-size li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 1px;
+  border: solid 2px #444444;
+  cursor: pointer;
+}
+
+.tool-size li:hover {
+  border-color: #888888;
+}
+
+.tool-size li.active {
+  border: 2px solid #ffd700;
+}
+
+.tool-size li div {
+  background-color: #ffffff;
+}
+
+.unit-1 div {
+  width: 6px;
+  height: 6px;  
+}
+
+.unit-2 div {
+  width: 8px;
+  height: 8px;  
+}
+
+.unit-3 div {
+  width: 10px;
+  height: 10px;  
+}
+
+.unit-4 div {
+  width: 12px;
+  height: 12px;  
+}
+
+.tools {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.tools li {
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  background-color: #3a3a3a;
+  margin: 1px;  
+}
+
+.tools li>div {
+  position: absolute;
+  width: 100%;
+  height: 100%;  
+  cursor: pointer;
+}
+
+.tools li:hover {
+  background-color: #444444;
+}
+
+.tools li.active {  
+  background-color: #3a3a3a;  
+}
+
+.tools li.active>div::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: 3px solid #ffd700;
+  box-sizing: border-box;
+}
+
+.pen>div {
+  background-image: url('../img/icons.png');
+  background-position: -182px -92px;
+}
+
+.stroke>div {
+  background-image: url('../img/icons.png');
+  background-position: -46px -136px;
+}
+
+.paint-bucket>div {
+  background-image: url('../img/icons.png');
+  background-position: -228px -92px;
+}
+
+.paint-all>div {
+  background-image: url('../img/icons.png');
+  background-position: -228px -138px;
+}
+
+.eraser>div {
+  background-image: url('../img/icons.png');
+  background-position: -46px -228px;
+}
+
+.color-picker>div {
+  background-image: url('../img/icons.png');
+  background-position: -274px 0px;
+}
+
+.canvas-clear>div {
+  background-image: url('../img/icons.png');
+  background-position: -402px -154px;
+  background-size: 470px auto;
+}
+
+.color-select {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+
+.primary {
+  position: absolute;
+  border: solid 4px #444444;
+  box-sizing: border-box;
+  width: 46px;
+  height: 46px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.secondary {
+  position: absolute;
+  border: solid 4px #444444;
+  box-sizing: border-box;
+  bottom: 0;
+  right: 0;
+  width: 46px;
+  height: 46px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.primary:hover,
+.secondary:hover {
+  border-color: #888888;
+}
+
+input[type=color] {
+  display: none;
+}
+
+.change-color {
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/icons.png');
+  background-position: -274px -222px;
+}
+
+.change-color div {
+  height: 100%;
+  background-color: #1d1d1da1;
+}
+
+.change-color div:hover {
+  background: none;
+  cursor: pointer;
+}
+
+.cur-pen {
+  cursor: url('../img/pen.png') 1 14, pointer;
+}
+
+.cur-paint-bucket {
+  cursor: url('../img/paint-bucket.png') 14 14, pointer;
+}
+
+.cur-stroke {
+  cursor: url('../img/stroke.png') 1 14, pointer;
+}
+
+.cur-eraser {
+  cursor: url('../img/eraser.png') 3 14, pointer;
+}
+
+.cur-color-picker {
+  cursor: url('../img/picker.png') 2 15, pointer;
+}
