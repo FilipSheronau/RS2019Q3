@@ -1,4 +1,5 @@
 import state from '../../state';
+import saveState from '../saveState';
 
 export default class Frame {
   constructor() {
@@ -9,13 +10,35 @@ export default class Frame {
   }
 
   load() {
-    if (state.frames.length === 0) {
+    if (state.frames.length === 0 && !saveState.canvas) {
       this.create();
     } else {
-      state.frames.forEach((value) => {
-        document.querySelector('.frame-list').appendChild(value);
+      const arrPromise = [];
+      saveState.canvas.forEach((value) => {
+        const promise = new Promise((resolve) => {
+          const img = new Image();
+          img.src = value;
+          img.onload = () => {
+            state.frames.push(this.frame.cloneNode(true));
+            const newFrameId = state.frames.length - 1;
+            state.frames[newFrameId].setAttribute('id', `frame-${newFrameId}`);
+            state.frames[newFrameId].dataset.id = newFrameId;
+            state.frames[newFrameId].querySelector('canvas').setAttribute('width', state.canvasSize);
+            state.frames[newFrameId].querySelector('canvas').setAttribute('height', state.canvasSize);
+            state.frames[newFrameId].querySelector('.number-frame').innerHTML = newFrameId + 1;
+            const ctx = state.frames[newFrameId].querySelector('canvas').getContext('2d');
+            ctx.drawImage(img, 0, 0, state.canvasSize, state.canvasSize);
+            resolve();
+          };
+        });
+        arrPromise.push(promise);
       });
-      state.activeFrame = state.frames[document.querySelector('.frame-list .active').dataset.id];
+      Promise.all(arrPromise).then(() => {
+        state.frames[state.activeFrame].classList.add('active');
+        saveState.canvas = null;
+        this.render();
+        state.mainCanvasObj.update(state.frames[state.activeFrame].querySelector('canvas').getContext('2d').getImageData(0, 0, state.canvasSize, state.canvasSize));
+      });
     }
   }
 
@@ -34,6 +57,16 @@ export default class Frame {
     this.render();
     state.activeFrame = newFrameId;
     state.mainCanvasObj.clear();
+  }
+
+  createNew() {
+    state.frames.push(this.frame.cloneNode(true));
+    const newFrameId = state.frames.length - 1;
+    state.frames[newFrameId].setAttribute('id', `frame-${newFrameId}`);
+    state.frames[newFrameId].dataset.id = newFrameId;
+    state.frames[newFrameId].querySelector('canvas').setAttribute('width', state.canvasSize);
+    state.frames[newFrameId].querySelector('canvas').setAttribute('height', state.canvasSize);
+    state.frames[newFrameId].querySelector('.number-frame').innerHTML = newFrameId + 1;
   }
 
   update(data) {

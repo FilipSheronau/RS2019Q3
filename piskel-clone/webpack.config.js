@@ -60,6 +60,9 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/img', to: 'img' },
     ]),
+    new CopyPlugin([
+      { from: 'src/js/scripts', to: 'js' },
+    ]),
   ],
   optimization: {
     splitChunks: {

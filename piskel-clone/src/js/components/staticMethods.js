@@ -3,12 +3,14 @@ import state from '../state';
 export default class StaticMethods {
   static getCoords(data) {
     const box = state.mainCanvas.getBoundingClientRect();
-    return {
+    const result = {
       top: Math.floor((data.pageY - (box.top + window.pageYOffset))
        / (state.canvasStyleSize / state.canvasSize)),
       left: Math.floor((data.pageX - (box.left + window.pageXOffset))
        / (state.canvasStyleSize / state.canvasSize)),
     };
+    document.querySelector('.coords').innerHTML = `${result.left + 1}x${result.top + 1}`;
+    return result;
   }
 
   static colorToRgba(c) {

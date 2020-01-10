@@ -1,7 +1,10 @@
 import state from '../state';
+import saveAnimation from './animation/saveAnimation';
+import saveState from './saveState';
 
 export default function events() {
   window.onload = () => {
+    saveState.load();
     state.mainCanvasObj.load();
     state.canvasSizeObj.load();
     state.toolObj.load();
@@ -10,6 +13,8 @@ export default function events() {
     state.secondaryColorObj.load();
     state.frameObj.load();
     state.playerObj.load();
+    state.playerControlObj.load();
+    saveAnimation.load();
   };
   document.querySelector('.canvas-size').onclick = (event) => { state.canvasSizeObj.set(event.target); };
   document.querySelector('.tools').onclick = (event) => { state.toolObj.set(event.target); };
@@ -26,6 +31,10 @@ export default function events() {
   document.querySelector('.frames').onmousedown = (event) => { state.frameDragObj.drag(event); };
   document.querySelector('.frames').ondragstart = () => false;
   document.querySelector('.frames').onmousemove = (event) => { state.frameDragObj.sort(event); };
-  document.getElementById('range-fps').onmousedown = (event) => { state.playerControlObj.set(event.target.value); };
+  document.getElementById('range-fps').change = (event) => { state.playerControlObj.set(event.target.value); };
   document.getElementById('range-fps').oninput = (event) => { state.playerControlObj.set(event.target.value); };
+  document.querySelector('.animated-preview-container').onclick = (event) => { event.target.closest('canvas').requestFullscreen(); };
+  document.querySelector('.file-name').oninput = (event) => { saveAnimation.setName(event.target); };
+  document.querySelector('.save-container').onclick = (event) => { saveAnimation.save(event.target); };
+  window.onbeforeunload = () => { saveState.save(); };
 }

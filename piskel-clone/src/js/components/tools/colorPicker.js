@@ -56,6 +56,7 @@ export default class ColorPicker {
 
   out() {
     state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    document.querySelector('.coords').innerHTML = '0x0';
   }
 
   picker(data) {

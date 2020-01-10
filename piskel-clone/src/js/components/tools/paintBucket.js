@@ -56,6 +56,7 @@ export default class PaintBucket {
 
   out() {
     state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    document.querySelector('.coords').innerHTML = '0x0';
   }
 
   fill(data) {

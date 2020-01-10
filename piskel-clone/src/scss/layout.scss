@@ -1,5 +1,6 @@
 .main-canvas-container {
   background: url('../img/canvas-bg.png') repeat;
+  height: 512px;
 }
 
 .main-canvas-container canvas {
@@ -28,12 +29,19 @@
   user-select: none;
   border: 3px solid #444444;
   padding-top: 4px;
-}
-
-.canvas-size li:hover {
-  border: 3px solid #888888;
+  &:hover {
+    border: 3px solid #888888;
+  }
 }
 
 .canvas-size li.active {
   border: 3px solid #ffd700;
+}
+
+.coords {
+  position: absolute;
+  bottom: 10px;
+  font-weight: bold;
+  color: #ffd700;
+  font-size: 18px;
 }

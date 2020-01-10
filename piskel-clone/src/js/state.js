@@ -3,14 +3,15 @@ const state = {
   canvasStyleSize: 512,
   tool: 'pen',
   toolSize: 1,
-  primaryColor: '#004600',
-  secondaryColor: '#ff56ff',
+  primaryColor: '#000000',
+  secondaryColor: '#ffffff',
   mainCanvas: null,
   mainCanvasCtx: null,
   frames: [],
-  frameImages: [],
+  fileName: null,
+  // frameImages: [],
   activeFrame: null,
-  playerFps: 10,
+  playerFps: 24,
 };
 
 export { state as default };

@@ -47,6 +47,7 @@ export default class Pen {
 
   out() {
     if (this.permitDraw !== true) state.mainCanvasCtx.putImageData(this.image, 0, 0);
+    document.querySelector('.coords').innerHTML = '0x0';
   }
 
   startDraw(data) {
