@@ -4,11 +4,12 @@ export default class Player {
   constructor() {
     this.canvasEl = document.createElement('canvas');
     this.i = 0;
+    this.isOn = false;
   }
 
   load() {
     this.create();
-    this.animation();
+    this.onPlayer();
   }
 
   create() {
@@ -22,29 +23,27 @@ export default class Player {
 
   animation() {
     const fps = 1000 / Number(state.playerFps);
-    if (Number(state.playerFps) === 0) {
-      this.ofPlayer();
-    } else {
-      this.onPlayer(fps);
-    }
-  }
-
-  ofPlayer() {
-    const img = state.frames[state.activeFrame].querySelector('canvas').getContext('2d').getImageData(0, 0, state.canvasSize, state.canvasSize);
-    state.playerCanvasCtx.putImageData(img, 0, 0);
-    this.i += 1;
-    requestAnimationFrame(() => { this.animation(); });
+    this.onPlayer(fps);
   }
 
   onPlayer(fps) {
     setTimeout(() => {
-      if (state.frames.length === 0) return;
-      if (this.i > state.frames.length - 1) this.i = 0;
-      let img = state.frames[this.i].querySelector('canvas');
-      img = img.getContext('2d').getImageData(0, 0, state.canvasSize, state.canvasSize);
-      state.playerCanvasCtx.putImageData(img, 0, 0);
-      this.i += 1;
-      requestAnimationFrame(() => { this.animation(); });
+      if (Number(state.playerFps) === 0) {
+        if (state.frames[state.activeFrame]) {
+          const img = state.frames[state.activeFrame].querySelector('canvas').getContext('2d').getImageData(0, 0, state.canvasSize, state.canvasSize);
+          state.playerCanvasCtx.putImageData(img, 0, 0);
+          this.i += 1;
+          requestAnimationFrame(() => { this.animation(); });
+        }
+      } else {
+        if (state.frames.length === 0) return;
+        if (this.i > state.frames.length - 1) this.i = 0;
+        let img = state.frames[this.i].querySelector('canvas');
+        img = img.getContext('2d').getImageData(0, 0, state.canvasSize, state.canvasSize);
+        state.playerCanvasCtx.putImageData(img, 0, 0);
+        this.i += 1;
+        requestAnimationFrame(() => { this.animation(); });
+      }
     }, fps);
   }
 }
