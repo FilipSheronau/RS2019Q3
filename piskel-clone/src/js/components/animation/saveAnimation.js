@@ -1,40 +1,42 @@
 
 import UPNG from 'upng-js';
 import download from 'downloadjs';
-import GIF from '../../scripts/gif';
 import state from '../../state';
 
 const saveAnimation = {
   load() {
     document.querySelector('.file-name').value = state.fileName;
   },
-
   setName(data) {
     state.fileName = data.value;
   },
-
-  save(data) {
+  saveImg(data) {
     const el = data.closest('li');
     if (el.className === 'gif-save') this.saveGif();
     if (el.className === 'apng-save') this.saveApng();
   },
-
   saveGif() {
+    // eslint-disable-next-line no-undef
     const gif = new GIF({
       workers: 2,
-      quality: 10,
+      quality: 1,
+      workerScript: 'dist/js/gif.worker.js',
       width: state.canvasSize,
       height: state.canvasSize,
     });
+
     state.frames.forEach((value) => {
-      gif.addFrame(value.querySelector('canvas'), { delay: 200 });
+      const ctx = value.querySelector('canvas').getContext('2d');
+      gif.addFrame(ctx, { copy: true, delay: 1000 / Number(state.playerFps) });
     });
-    gif.on('finished', (blob) => {
-      window.open(URL.createObjectURL(blob));
-    });
-    gif.render();
+
     const name = state.fileName || 'animation';
-    download(gif, `${name}.gif`, 'image/gif');
+
+    gif.on('finished', (blob) => {
+      download(blob, `${name}.gif`, 'image/gif');
+    });
+
+    gif.render();
   },
 
   saveApng() {

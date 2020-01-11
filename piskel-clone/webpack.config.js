@@ -3,6 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: { main: './src/app.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -12,14 +13,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
       {
         test: /\.s[ac]ss$/i,
@@ -52,6 +48,9 @@ module.exports = {
         },
       },
     ],
+  },
+  devServer: {
+    contentBase: './',
   },
   plugins: [
     new MiniCssExtractPlugin({

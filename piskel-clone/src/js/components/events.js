@@ -35,6 +35,6 @@ export default function events() {
   document.getElementById('range-fps').oninput = (event) => { state.playerControlObj.set(event.target.value); };
   document.querySelector('.animated-preview-container').onclick = (event) => { event.target.closest('canvas').requestFullscreen(); };
   document.querySelector('.file-name').oninput = (event) => { saveAnimation.setName(event.target); };
-  document.querySelector('.save-container').onclick = (event) => { saveAnimation.save(event.target); };
+  document.querySelector('.save-container').onclick = (event) => { saveAnimation.saveImg(event.target); };
   window.onbeforeunload = () => { saveState.save(); };
 }
